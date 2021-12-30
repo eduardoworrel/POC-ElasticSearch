@@ -1,1 +1,1 @@
-- Adaptado de https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html e https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-docker.html?baymax=rec&rogue=rec-1&elektra=guide 
+- Baseado no código disponibilizado por David Pilato em https://discuss.elastic.co/t/set-password-and-user-with-docker-compose/225075/2

@@ -20,7 +20,7 @@ namespace Api.Controllers
         [Route("Store")]
         public Page Store(Page page)
         {
-
+            page.Datahora = DateTime.Now;
             var settings = new ConnectionSettings(new System.Uri("http://elastic:password@localhost:9200"))
                 .DefaultIndex("bruto");
 

@@ -1,15 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "kM5vV4sofYtTiM6FOhFtp/euYDmM3sD2MHvbgcicby+C8vwEl3MmrMlbmC7M/Ry7QYaP+qHJ4uY80SU4gc7Yng==",
+  "dgSpecHash": "cd6gJh3dGLzeVBgbWJRUiahKRsz2MzIFWVZ5dtw5OMOAnr5P5IpDOx4zLnBCdMhKHs4POj90tbHfKTmiHsUxQg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\eworrel\\Documents\\Nova pasta\\POC-ElasticSearch\\src\\Api\\Api.csproj",
+  "projectFilePath": "/Users/eduardoworrel/Projects/POC-ElasticSearch/src/Api/Api.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\eworrel\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
-    "C:\\Users\\eworrel\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\eworrel\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.5\\swashbuckle.aspnetcore.6.1.5.nupkg.sha512",
-    "C:\\Users\\eworrel\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.5\\swashbuckle.aspnetcore.swagger.6.1.5.nupkg.sha512",
-    "C:\\Users\\eworrel\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.5\\swashbuckle.aspnetcore.swaggergen.6.1.5.nupkg.sha512",
-    "C:\\Users\\eworrel\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.5\\swashbuckle.aspnetcore.swaggerui.6.1.5.nupkg.sha512"
+    "/Users/eduardoworrel/.nuget/packages/elasticsearch.net/7.16.0/elasticsearch.net.7.16.0.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/microsoft.csharp/4.6.0/microsoft.csharp.4.6.0.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/nest/7.16.0/nest.7.16.0.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/swashbuckle.aspnetcore/6.1.5/swashbuckle.aspnetcore.6.1.5.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/swashbuckle.aspnetcore.swagger/6.1.5/swashbuckle.aspnetcore.swagger.6.1.5.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.1.5/swashbuckle.aspnetcore.swaggergen.6.1.5.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.1.5/swashbuckle.aspnetcore.swaggerui.6.1.5.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
+    "/Users/eduardoworrel/.nuget/packages/system.diagnostics.diagnosticsource/5.0.0/system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

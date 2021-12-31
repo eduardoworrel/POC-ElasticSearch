@@ -11,7 +11,7 @@ module.exports = {
             for(let siteAction in actions){
                collection.push( await loadPage(actions[siteAction])) 
             }
-            console.log(collection)
+            
         }catch(e){
             console.log(e);
         }

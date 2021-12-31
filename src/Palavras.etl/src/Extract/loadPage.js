@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
+const {removeSelections} = require("../Transform/removeDirty")
 
 module.exports = {
-    loadPage: async (callback) => {
+    loadPage: async (siteAction) => {
         let keyValue;
         const browser = await puppeteer.launch({
             headless: true,
@@ -10,10 +11,10 @@ module.exports = {
 
         const page = await browser.newPage();
         page.setDefaultTimeout(30000)
-
+        await page.exposeFunction("removeSelections", removeSelections);
         try {
 
-            keyValue = await callback(page);
+            keyValue = await siteAction(page);
 
         } catch (er) {
             console.log(er)

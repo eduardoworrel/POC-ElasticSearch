@@ -1,5 +1,5 @@
 const {extract} = require('./src/Extract/extract');
-const {transform} = require('./Transform/transform');
+const {transform} = require('./src/Transform/transform');
 const {load} = require('./src/Load/load');
 
 const cron = require("node-cron");

@@ -23,9 +23,7 @@ const uol = async (page) => {
     const pageText = await page.evaluate(() => {
         const _document = document;
         [
-          ".header",
-          ".partner-links",
-          ".footer "
+          ".header"
         ].forEach((selector) => {
             _document.querySelector(selector).remove()
         });

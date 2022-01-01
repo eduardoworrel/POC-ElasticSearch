@@ -49,11 +49,11 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("GetGroups")]
-        public List<List<WordCount>> GetGroups()
+        public List<PageWordCount> GetGroups()
         {
 
 
-            List<List<WordCount>> result = new List<List<WordCount>> ();
+            List<PageWordCount> result = new List<PageWordCount>();
             var settings = new ConnectionSettings(new System.Uri("http://elastic:password@localhost:9200"))
                   .DefaultIndex("bruto");
 
@@ -68,13 +68,16 @@ namespace Api.Controllers
             pages.ForEach((page) =>
             {
                 var splited = page.Data?.Split(" ");
-                var groups = splited?.GroupBy((item) => item).OrderByDescending(item => item.Count())
+                var groups = splited?.GroupBy((item) => item)
                 .Select(group => new WordCount{
                     Word = group.Key,
                     Count = group.Count()
-                }).ToList();
-              
-                result.Add(groups);
+                }).OrderByDescending(item => item.Count).ToList();
+
+                result.Add(new PageWordCount {
+                    Site = page.Key,
+                    WordCounts = groups
+                });
             });
 
 

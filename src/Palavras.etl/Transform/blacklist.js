@@ -26,8 +26,15 @@ module.exports = {
         " no ",
         " ano ",
         " se ",
+        " seu ",
+        " sua ",
+        " após ",
+        " quem ",
         " isso ",
         " disso ",
+        " vai ",
+        " fim ",
+        " dia ",
         " disto ",
         " é ",
         " por ",
@@ -52,7 +59,9 @@ module.exports = {
         " um ",
         " uma ",
         " sobre ",
+        " faça ",
         "\\n",
+        "  "
       
     ]
 }

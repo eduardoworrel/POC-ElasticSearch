@@ -45,15 +45,15 @@ namespace Api.Controllers
 
             return pages;
 
-        }   
+        }
 
         [HttpGet]
         [Route("GetGroups")]
-        public List<IEnumerable<IGrouping<string, string>>> GetGroups()
+        public List<List<WordCount>> GetGroups()
         {
 
 
-            List<IEnumerable<IGrouping<string,string>>> result = new List<IEnumerable<IGrouping<string, string>>>();
+            List<List<WordCount>> result = new List<List<WordCount>> ();
             var settings = new ConnectionSettings(new System.Uri("http://elastic:password@localhost:9200"))
                   .DefaultIndex("bruto");
 
@@ -63,14 +63,21 @@ namespace Api.Controllers
                 .From(0)
             );
 
-            var pages = (List<Page>) searchResponse.Documents;
+            var pages = (List<Page>)searchResponse.Documents;
 
-            pages.ForEach((page) => {
+            pages.ForEach((page) =>
+            {
                 var splited = page.Data?.Split(" ");
-                var groups = splited?.GroupBy((item) => item).OrderByDescending(item => item.Count()).ToList();
+                var groups = splited?.GroupBy((item) => item).OrderByDescending(item => item.Count())
+                .Select(group => new WordCount{
+                    Word = group.Key,
+                    Count = group.Count()
+                }).ToList();
+              
                 result.Add(groups);
             });
-            
+
+
             return result;
 
         }

@@ -1,14 +1,23 @@
-const {blackList} = require('./blacklist.js') 
+const {blackList,sinalList} = require('./blacklist.js') 
 const whiteSpace = ' ';
 
 module.exports = {
     transform : (collection) => {
         //remove pronomes e conectores
+        cleanList = [];
         for(keyValue of collection){
-            for(remove of blackList){
-                keyValue.data = keyValue.data.replace(remove, whiteSpace);
+            let newData = keyValue.data.toLowerCase();
+            for(remove of sinalList){
+                newData = newData.replace(remove, whiteSpace)
             }
+            for(remove of blackList){
+                newData = newData.replace(new RegExp(remove, 'g'), whiteSpace)
+            }
+            cleanList.push({
+                key:   keyValue.key,
+                data:  newData.trim()
+            });
         }
-        return collection;
+        return cleanList;
     }
 }

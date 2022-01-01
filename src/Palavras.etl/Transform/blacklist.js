@@ -7,10 +7,8 @@ module.exports = {
         "/,/g",
         "/./g",
         "/-/g",
-        "/-/g",
         "/.../g",
         "/'/g",
-        "/-/g",
     ],
     blackList :
      [
@@ -51,6 +49,9 @@ module.exports = {
         " nos ",
         " não ",
         " para ",
+        " um ",
+        " uma ",
+        " sobre ",
         "\\n",
       
     ]

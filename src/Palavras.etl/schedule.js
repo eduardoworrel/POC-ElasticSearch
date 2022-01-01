@@ -12,8 +12,8 @@ async function start(){
         console.log(e)
     } 
 }
-cron.schedule("00 00 00,6,12,18 * * *", async () => {
-   await start();
-})
+// cron.schedule("00 00 00,6,12,18 * * *", async () => {
+//    await start();
+// })
 
 start().catch();

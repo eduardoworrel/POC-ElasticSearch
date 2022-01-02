@@ -9,10 +9,13 @@ module.exports = {
         "/-/g",
         "/.../g",
         "/'/g",
+        "/&/g",
     ],
     blackList :
      [
+        "–",
         " a ",
+        " à ",
         " as ",
         " o ",
         " os ",
@@ -28,6 +31,7 @@ module.exports = {
         " se ",
         " seu ",
         " sua ",
+        " são ",
         " após ",
         " quem ",
         " isso ",
@@ -45,6 +49,8 @@ module.exports = {
         " mais ",
         " têm ",
         " tiveram ",
+        " ver ",
+        " anos ",
         " com ",
         " como ",
         " pelo ",
@@ -60,8 +66,9 @@ module.exports = {
         " uma ",
         " sobre ",
         " faça ",
+        " veja ",
         "\\n",
-        "  "
+        " "
       
     ]
 }

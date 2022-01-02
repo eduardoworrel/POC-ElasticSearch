@@ -39,7 +39,7 @@ const cnnbrasil = async (page) => {
     await page.goto("https://www.cnnbrasil.com.br");
     const pageText = await page.evaluate(() => {
         const _document = document;
-        [".header__group"].forEach((selector) => {
+        [".header__group","footer"].forEach((selector) => {
             _document.querySelector(selector).remove()
         });
         return _document.querySelector("body").innerText;
@@ -73,18 +73,17 @@ const jovempan = async (page) => {
     }
 }
 const terra = async (page) => {
-    await page.goto("https://www.terra.com.br/noticias/");
+    await page.goto("https://www.terra.com.br");
     const pageText = await page.evaluate(() => {
         const _document = document;
             [
                 ".table-ad",
                 "#zaz-app-t360-navbar",
-                ".t360-sva-bar",
-                ".app-t360-subject-table__base--group",
-                ".zaz-app-t360-footer"
+              
             ].forEach((selector) => {
                 _document.querySelector(selector).remove()
             });;
+
         return _document.querySelector("body").innerText;
     });
 

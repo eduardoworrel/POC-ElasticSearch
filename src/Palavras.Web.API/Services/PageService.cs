@@ -10,30 +10,44 @@ namespace Services
     {
         public static List<PageWordCount> ProcessaAgrupamento(List<Page> pages)
         {
-            var listWordCount = new List<PageWordCount>{};
+            var listWordCount = new List<PageWordCount> { };
 
-            //1- agrupar series historicas das páginas por Site (Page.Key)
-            foreach (var group in pages.GroupBy(g => g.Key)){
-                //Para cada grupo de muitos textos, cria-se apenas um objeto PageWordCount
-                var PageWordCount = new PageWordCount {
+            foreach (var group in pages.GroupBy(g => g.Key))
+            {
+                var PageWordCount = new PageWordCount
+                {
                     Site = group.Key,
-                    WordCounts = new List<WordCount>{}
+                    WordCounts = new List<WordCount> { }
                 };
-
-                foreach(Page page in group){
-                    var splited = page.Data?.Split(" ");
-                    var WordGroups = splited?.GroupBy((item) => item)
-                    .Select(group => new WordCount
-                    {
-                        Word = group.Key,
-                        Count = group.Count()
-                    }).OrderByDescending(item => item.Count).ToList();
-                    PageWordCount.WordCounts.AddRange(WordGroups);
+                var FullText = string.Empty;
+                foreach (Page page in group)
+                {
+                    FullText += page.Data;
                 }
+                var splited = FullText.Trim().Split(" ");
+
+                var WordGroups = splited?.GroupBy((item) => item)
+                .Select(group => new WordCount
+                {
+                    Word = group.Key,
+                    Count = group.Count()
+                })
+                .OrderByDescending(item => item.Count)
+                .Where(i => i.Word != "&"
+                && i.Word != "mais"
+                && i.Word != "g1"
+                && i.Word != ""
+                && i.Word != " "
+                && i.Word != "o") // reaply blacklist?
+                .Take(10)
+                .ToList();
+
+                PageWordCount.WordCounts.AddRange(WordGroups ?? new List<WordCount> { });
+
                 listWordCount.Add(PageWordCount);
             }
             return listWordCount;
-            
+
         }
     }
 }

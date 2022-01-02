@@ -55,14 +55,37 @@ namespace Api.Controllers
 
 
             List<PageWordCount> result = new List<PageWordCount>();
-            
+
             var client = ElasticService.GetClient("bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
             );
 
-            var pages = (List<Page>) searchResponse.Documents;
+            var pages = (List<Page>)searchResponse.Documents;
+
+            result = PageService.ProcessaAgrupamentoBySite(pages);
+
+
+            return result;
+
+        }
+
+        [HttpGet]
+        [Route("GetRank")]
+        public List<WordCount> GetRank()
+        {
+
+
+            List<WordCount> result = new List<WordCount>();
+
+            var client = ElasticService.GetClient("bruto");
+
+            var searchResponse = client.Search<Page>(s => s
+                .From(0)
+            );
+
+            var pages = (List<Page>)searchResponse.Documents;
 
             result = PageService.ProcessaAgrupamento(pages);
 
@@ -71,5 +94,18 @@ namespace Api.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetRankThisMonth")]
+        public List<WordCount> GetRankThisMonth()
+        {
+            return new List<WordCount>() { };
+        }
+
+        [HttpGet]
+        [Route("GetRankThisWeek")]
+        public List<WordCount> GetRankThisWeek()
+        {
+            return new List<WordCount>() { };
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Nest;
+using Services;
 namespace Api.Controllers
 {
 
@@ -54,31 +55,16 @@ namespace Api.Controllers
 
 
             List<PageWordCount> result = new List<PageWordCount>();
-            var settings = new ConnectionSettings(new System.Uri("http://elastic:password@localhost:9200"))
-                  .DefaultIndex("bruto");
-
-            var client = new ElasticClient(settings);
+            
+            var client = ElasticService.GetClient("bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
             );
 
-            var pages = (List<Page>)searchResponse.Documents;
+            var pages = (List<Page>) searchResponse.Documents;
 
-            pages.ForEach((page) =>
-            {
-                var splited = page.Data?.Split(" ");
-                var groups = splited?.GroupBy((item) => item)
-                .Select(group => new WordCount{
-                    Word = group.Key,
-                    Count = group.Count()
-                }).OrderByDescending(item => item.Count).ToList();
-
-                result.Add(new PageWordCount {
-                    Site = page.Key,
-                    WordCounts = groups
-                });
-            });
+            result = PageService.ProcessaAgrupamento(pages);
 
 
             return result;

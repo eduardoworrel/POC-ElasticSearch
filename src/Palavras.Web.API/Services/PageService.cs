@@ -42,6 +42,7 @@ namespace Services
                 && i.Word != ""
                 && i.Word != " "
                 && i.Word != "o"
+                && i.Word != "com"
                 && i.Word != "2") // transformação precisa melhorar 
                 .Take(5)
                 .ToList();
@@ -81,6 +82,7 @@ namespace Services
             && i.Word != "cnn"
             && i.Word != ""
             && i.Word != " "
+            && i.Word != "com"
             && i.Word != "o"
             && i.Word != "2") // reaply blacklist?
             .Take(10)

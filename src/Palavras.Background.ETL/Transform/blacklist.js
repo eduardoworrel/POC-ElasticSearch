@@ -38,6 +38,7 @@ module.exports = {
         " disso ",
         " vai ",
         " fim ",
+        " foi ",
         " dia ",
         " disto ",
         " é ",
@@ -67,6 +68,7 @@ module.exports = {
         " sobre ",
         " faça ",
         " veja ",
+        " já ",
         "\\n",
         " "
       

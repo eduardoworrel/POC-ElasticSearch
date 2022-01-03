@@ -1,14 +1,17 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
 WORKDIR /app
 
-# Copy everything else and build
 COPY ./ ./
-RUN dotnet publish ./Scraping.Web.MVC/Scraping.Web.MVC.csproj -c Release -o out
 
-# Build runtime image
+RUN dotnet publish Palavras.Web.API.csproj -c release -o /out
+
+# final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build /out ./
 
 EXPOSE 5001
-ENTRYPOINT ["dotnet", "Scraping.Web.MVC.dll"]
+
+ENTRYPOINT ["dotnet", "Palavras.Web.API.dll"]

@@ -35,6 +35,9 @@ services:
     restart: always
     environment:
       TZ: "America/Sao_Paulo"
-
+  spa:
+    build: ../../src/Palavras.Web.SPA/.
+    ports:
+      - '80:80'
 networks:
   stack: {}

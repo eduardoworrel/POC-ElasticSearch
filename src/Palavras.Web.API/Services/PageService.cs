@@ -85,7 +85,7 @@ namespace Services
             && i.Word != "com"
             && i.Word != "o"
             && i.Word != "2") // reaply blacklist?
-            .Take(10)
+            .Take(15)
             .ToList();
 
             listWordCount.AddRange(WordGroups ?? new List<WordCount> { });         

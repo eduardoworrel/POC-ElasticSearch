@@ -67,6 +67,7 @@ module.exports = {
         " uma ",
         " sobre ",
         " faça ",
+        " faz ",
         " veja ",
         " já ",
         "\\n",

@@ -2,7 +2,8 @@ import { Heading, Box, List, Card, Text, Paragraph, Anchor } from "@dracula/drac
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobeAmericas, faCube , faCubes} from '@fortawesome/free-solid-svg-icons'
-import {   Chart as ChartJS,
+
+import { Chart as ChartJS,
     RadialLinearScale,
     ArcElement,
     Tooltip,
@@ -37,9 +38,14 @@ const Ranking = () => {
             const labels = [];
             const data = [];
             const colors = [];
+
             for (let wordCount of a) {
-                labels.push(`${wordCount.word} (${wordCount.count})`)
-                data.push(wordCount.count)
+                labels.push(`${wordCount.word} - ${(
+                                        (wordCount.count/a
+                                                .reduce((s,b) => s + b.count ,0)) * 100).toFixed(2)}%`)
+                data.push((
+                    (wordCount.count/a
+                            .reduce((s,b) => s + b.count ,0)) * 100).toFixed(2))
 
                 const randomBetween = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
                 const r = randomBetween(0, 255);
@@ -115,7 +121,9 @@ const Ranking = () => {
                                 {
                                     i.wordCounts.map((wordCount, count) =>
                                         <li key={count} className="drac-text drac-text-white">
-                                            <Text color="black"> {count + 1}º <b>{wordCount.word}</b> ({wordCount.count})</Text>
+                                            <Text color="black"> {count + 1}º <b>{wordCount.word}
+                                            </b> ({((wordCount.count/i.wordCounts
+                                                .reduce((a,b) => a + b.count,0)) * 100).toFixed(2)}%)</Text>
                                         </li>
                                     )
                                 }
@@ -136,7 +144,7 @@ const Ranking = () => {
                 width: "30%",
                 float: "left"
             }}
-                color="purpleCyan" m="sm" p="sm">
+                color="pink" m="sm" p="sm">
 
                 <Heading p="sm" >
                     <Text color="black"><FontAwesomeIcon icon={faGlobeAmericas} />   TOP 10 </Text>
@@ -145,7 +153,11 @@ const Ranking = () => {
                     <List size="" p="">
                         {list.map((i, c) =>
                             <li key={c} className="drac-text drac-text-white">
-                                <Text color="black"> {c + 1}º <b>{i.word}</b> ({i.count})</Text>
+                                <Text color="black"> {c + 1}º <b>{i.word}</b> 
+                                    ({(
+                                        (i.count/list
+                                                .reduce((a,b) => a + b.count ,0)) * 100).toFixed(2)
+                                                }%)</Text>
                             </li>
                         )}
                     </List>

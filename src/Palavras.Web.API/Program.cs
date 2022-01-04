@@ -11,6 +11,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(

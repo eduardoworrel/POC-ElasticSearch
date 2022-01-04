@@ -1,1 +1,0 @@
-- Baseado no código disponibilizado por David Pilato em https://discuss.elastic.co/t/set-password-and-user-with-docker-compose/225075/2

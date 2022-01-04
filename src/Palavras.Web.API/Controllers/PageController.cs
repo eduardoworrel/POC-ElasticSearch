@@ -29,6 +29,30 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [Route("GetUltimaAtualizacao")]
+        public string GetUltimaAtualizacao()
+        {
+
+            var settings = new ConnectionSettings(new System.Uri("http://elastic:password@localhost:9200"))
+                  .DefaultIndex("bruto");
+
+            var client = new ElasticClient(settings);
+
+            var searchResponse = client.Search<Page>(s => s
+                .From(0)
+                .Take(1)
+                .Sort(sort =>
+                    sort.Descending(f => f.Datahora)
+    )
+            );
+
+            var page = searchResponse.Documents.First();
+
+            return page.Datahora.ToString("dd/MM/yyyy HH:mm");
+
+        }
+
+        [HttpGet]
         [Route("Get")]
         public IEnumerable<Page> Get()
         {

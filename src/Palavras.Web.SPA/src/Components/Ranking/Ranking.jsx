@@ -1,13 +1,15 @@
 import { Heading, Box, List, Card, Text, Paragraph, Anchor } from "@dracula/dracula-ui";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGlobeAmericas, faCube , faCubes} from '@fortawesome/free-solid-svg-icons'
+import { faGlobeAmericas, faCube, faCubes } from '@fortawesome/free-solid-svg-icons'
 
-import { Chart as ChartJS,
+import {
+    Chart as ChartJS,
     RadialLinearScale,
     ArcElement,
     Tooltip,
-    Legend,} from 'chart.js';
+    Legend,
+} from 'chart.js';
 import { PolarArea } from 'react-chartjs-2';
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
@@ -41,11 +43,11 @@ const Ranking = () => {
 
             for (let wordCount of a) {
                 labels.push(`${wordCount.word} - ${(
-                                        (wordCount.count/a
-                                                .reduce((s,b) => s + b.count ,0)) * 100).toFixed(2)}%`)
+                    (wordCount.count / a
+                        .reduce((s, b) => s + b.count, 0)) * 100).toFixed(2)}%`)
                 data.push((
-                    (wordCount.count/a
-                            .reduce((s,b) => s + b.count ,0)) * 100).toFixed(2))
+                    (wordCount.count / a
+                        .reduce((s, b) => s + b.count, 0)) * 100).toFixed(2))
 
                 const randomBetween = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
                 const r = randomBetween(0, 255);
@@ -85,52 +87,48 @@ const Ranking = () => {
                 marginBottom: "50px"
             }}>Palavras mais citadas nos sites de notícia</Heading>
             <Card style={{
-                        width: "22%",
-                        float: "left"
-                    }}
-                    variant="subtle"
-                        color="pink" m="sm" p="sm">
+                width: "22%",
+                float: "left"
+            }}
+                variant="subtle"
+                color="pink" m="sm" p="sm">
 
 
-                        <div >
-                            <Heading p="sm" size="sm">
-                                <Text color="white"> <FontAwesomeIcon icon={faCubes} /> Detalhes</Text>
-                            </Heading>
-                            <Paragraph>
-                            <Text color="white"> Ultima Atualização: <b>02/02/2022 12h00</b> </Text>
-                            </Paragraph>   
-                            <Paragraph>
-                            <Text color="white"> Saiba como contribuir em <Anchor 
-                            color="cyanGreen" hoverColor="yellowPink" href="https://github.com/eduardoworrel/Palavras-ETL-ElasticSearch">github.com</Anchor> </Text>
-                            </Paragraph>   
-                        </div>
-                    </Card>
+                <div >
+                    <Heading p="sm" size="sm">
+                        <Text color="white"> <FontAwesomeIcon icon={faCube} /></Text>
+                    </Heading>
+                    <Paragraph>
+                        <Text color="white"> Ultima Atualização: <b>02/02/2022 12h00</b> </Text>
+                    </Paragraph>
+                </div>
+            </Card>
             {group.map((i, c) =>
-                    <Card key={c} style={{
-                        width: "22%",
-                        float: "left"
-                    }}
-                        color="pinkPurple" m="sm" p="sm">
+                <Card key={c} style={{
+                    width: "22%",
+                    float: "left"
+                }}
+                    color="pinkPurple" m="sm" p="sm">
 
 
-                        <div >
-                            <Heading p="sm" size="sm">
-                                <Text color="black"> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
-                            </Heading>
-                            <List>
-                                {
-                                    i.wordCounts.map((wordCount, count) =>
-                                        <li key={count} className="drac-text drac-text-white">
-                                            <Text color="black"> {count + 1}º <b>{wordCount.word}
-                                            </b> ({((wordCount.count/i.wordCounts
-                                                .reduce((a,b) => a + b.count,0)) * 100).toFixed(2)}%)</Text>
-                                        </li>
-                                    )
-                                }
-                            </List>
-                        </div>
-                    </Card>
-                )}
+                    <div >
+                        <Heading p="sm" size="sm">
+                            <Text color="black"> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
+                        </Heading>
+                        <Box>
+                            {
+                                i.wordCounts.map((wordCount, count) =>
+                                    <div key={count} className="drac-text drac-text-white">
+                                        <Text color="black"> {count + 1}º <b>{wordCount.word}
+                                        </b> ({((wordCount.count / i.wordCounts
+                                            .reduce((a, b) => a + b.count, 0)) * 100).toFixed(2)}%)</Text>
+                                    </div>
+                                )
+                            }
+                        </Box>
+                    </div>
+                </Card>
+            )}
             <Box style={{
                 width: "96%",
                 float: "left",
@@ -139,35 +137,35 @@ const Ranking = () => {
                 borderRadius: "10px"
             }}
                 color="" m="sm" >
-                
-            <Card style={{
-                width: "30%",
-                float: "left"
-            }}
-                color="pink" m="sm" p="sm">
 
-                <Heading p="sm" >
-                    <Text color="black"><FontAwesomeIcon icon={faGlobeAmericas} />   TOP 10 </Text>
-                </Heading>
-                <>
-                    <List size="" p="">
-                        {list.map((i, c) =>
-                            <li key={c} className="drac-text drac-text-white">
-                                <Text color="black"> {c + 1}º <b>{i.word}</b> 
+                <Card style={{
+                    width: "30%",
+                    float: "left"
+                }}
+                    color="pink" m="sm" p="sm">
+
+                    <Heading p="sm" >
+                        <Text color="black"><FontAwesomeIcon icon={faGlobeAmericas} />   TOP 10 </Text>
+                    </Heading>
+                    <>
+                        <List size="" p="">
+                            {list.map((i, c) =>
+                                <li key={c} className="drac-text drac-text-white">
+                                    <Text color="black"> {c + 1}º <b>{i.word}</b>
                                     ({(
-                                        (i.count/list
-                                                .reduce((a,b) => a + b.count ,0)) * 100).toFixed(2)
-                                                }%)</Text>
-                            </li>
-                        )}
-                    </List>
-                </>
-            </Card>
-            <Box style={{
-                        width: "39%",
-                        float: "left"
-                    }}>
-                {montaGrafico(data)}
+                                            (i.count / list
+                                                .reduce((a, b) => a + b.count, 0)) * 100).toFixed(2)
+                                        }%)</Text>
+                                </li>
+                            )}
+                        </List>
+                    </>
+                </Card>
+                <Box style={{
+                    width: "39%",
+                    float: "left"
+                }}>
+                    {montaGrafico(data)}
                 </Box>
             </Box>
         </Box>

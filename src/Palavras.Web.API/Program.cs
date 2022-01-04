@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
                       builder =>
                       {
-                          builder.WithOrigins("http://localhost");
+                          builder.WithOrigins("http://localhost","http://localhost:3000");
                       });
 });
 

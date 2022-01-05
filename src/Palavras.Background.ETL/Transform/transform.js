@@ -3,7 +3,7 @@ const whiteSpace = ' ';
 
 module.exports = {
     transform : (collection) => {
-        //remove pronomes e conectores
+        //remove pronomes e conectores https://significado.herokuapp.com/livro
         cleanList = [];
         for(keyValue of collection){
             let newData = keyValue.data.toLowerCase();

@@ -18,10 +18,9 @@ namespace Api.Controllers
         public Page Store(Page page)
         {
             page.Datahora = DateTime.Now;
-            var settings = new ConnectionSettings(new System.Uri("http://elastic:password@localhost:9200"))
-                .DefaultIndex("bruto");
+ 
+            var client = ElasticService.GetClient("bruto");
 
-            var client = new ElasticClient(settings);
             var indexResponse = client.IndexDocument(page);
 
             return page;
@@ -33,10 +32,7 @@ namespace Api.Controllers
         public string GetUltimaAtualizacao()
         {
 
-            var settings = new ConnectionSettings(new System.Uri("http://elastic:password@localhost:9200"))
-                  .DefaultIndex("bruto");
-
-            var client = new ElasticClient(settings);
+            var client = ElasticService.GetClient("bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
@@ -57,10 +53,8 @@ namespace Api.Controllers
         public IEnumerable<Page> Get()
         {
 
-            var settings = new ConnectionSettings(new System.Uri("http://elastic:password@localhost:9200"))
-                  .DefaultIndex("bruto");
-
-            var client = new ElasticClient(settings);
+ 
+            var client = ElasticService.GetClient("bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)

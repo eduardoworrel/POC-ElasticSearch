@@ -14,25 +14,27 @@ import { PolarArea } from 'react-chartjs-2';
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
-const UrlRank = "http://localhost:5001/Page/GetRank"
-const UrlGroup = "http://localhost:5001/Page/GetGroups"
+const UrlUltimaAtualizacao = "http://eduardoworrel.com:5001/Page/GetUltimaAtualizacao"
+const UrlRank = "http://eduardoworrel.com:5001/Page/GetRank"
+const UrlGroup = "http://eduardoworrel.com:5001/Page/GetGroups"
+function montaGrafico(data) {
 
+    if (data != 0)
+        return (
+            <>
+
+                <PolarArea
+                    data={data} />
+
+            </>)
+}
 const Ranking = () => {
     const [list, setList] = useState([]);
     const [group, setGroup] = useState([]);
     const [data, setData] = useState(0);
+    const [atualizacao, setAtualizacao] = useState("Carregando..");
 
-    function montaGrafico(data) {
-
-        if (data != 0)
-            return (
-                <>
-
-                    <PolarArea
-                        data={data} />
-
-                </>)
-    }
+   
     const load = () => {
         fetch(UrlRank).then(a => a.json()).then((a) => {
             setList(a)
@@ -73,7 +75,9 @@ const Ranking = () => {
         });
         fetch(UrlGroup).then(a => a.json()).then((a) => {
             setGroup(a)
-
+        });
+        fetch(UrlUltimaAtualizacao).then(a => a.text()).then((a) => {
+            setAtualizacao(a)
         });
     }
     useEffect(load, []);
@@ -99,7 +103,7 @@ const Ranking = () => {
                         <Text color="white"> <FontAwesomeIcon icon={faCube} /></Text>
                     </Heading>
                     <Paragraph>
-                        <Text color="white"> Ultima Atualização: <b>02/02/2022 12h00</b> </Text>
+                        <Text color="white"> Ultima Atualização: <b>{atualizacao}</b> </Text>
                     </Paragraph>
                 </div>
             </Card>

@@ -9,7 +9,7 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Api' " />
   <ItemGroup>
     <PackageReference Include="NEST" Version="7.16.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>

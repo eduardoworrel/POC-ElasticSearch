@@ -19,6 +19,3 @@ services:
     build: ../../src/Palavras.Web.SPA/.
     ports:
       - '80:80'
-      
-networks:
-  stack: {}

@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
                       OpBuilder =>
                       {
-                          OpBuilder.WithOrigins("*");
+                          OpBuilder.WithOrigins("https://palavras.eduardoworrel.com","localhost");
                       });
 });
 

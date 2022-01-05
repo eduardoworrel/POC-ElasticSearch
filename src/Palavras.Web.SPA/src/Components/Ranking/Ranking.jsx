@@ -14,9 +14,9 @@ import { PolarArea } from 'react-chartjs-2';
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
-const UrlUltimaAtualizacao = "http://eduardoworrel.com:5001/Page/GetUltimaAtualizacao"
-const UrlRank = "http://eduardoworrel.com:5001/Page/GetRank"
-const UrlGroup = "http://eduardoworrel.com:5001/Page/GetGroups"
+const UrlUltimaAtualizacao = "https://palavras-api.eduardoworrel.com/Page/GetUltimaAtualizacao"
+const UrlRank = "https://palavras-api.eduardoworrel.com/Page/GetRank"
+const UrlGroup = "https://palavras-api.eduardoworrel.com/Page/GetGroups"
 function montaGrafico(data) {
 
     if (data != 0)

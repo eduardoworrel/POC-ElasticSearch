@@ -18,13 +18,37 @@ const UrlUltimaAtualizacao = "https://palavras-api.eduardoworrel.com/Page/GetUlt
 const UrlRank = "https://palavras-api.eduardoworrel.com/Page/GetRank"
 const UrlGroup = "https://palavras-api.eduardoworrel.com/Page/GetGroups"
 function montaGrafico(data) {
+    var options = {
+
+        legend: {
+            display: false
+        },
+        tooltips: {
+            callbacks: {
+                label: function (tooltipItem) {
+                    return tooltipItem.yLabel;
+                }
+            }
+        }
+    }
 
     if (data != 0)
         return (
             <>
 
                 <PolarArea
-                    data={data} />
+                    data={data}
+                    options={
+                        {
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+
+                />
 
             </>)
 }
@@ -125,36 +149,32 @@ const Ranking = () => {
                 </Card>
             )}
 
-<Card className="smallCard"
-                    color="pink" m="sm" p="sm">
+            <Card className="smallCard"
+                color="pink" m="sm" p="sm">
 
-                    <Heading p="sm" >
-                        <Text color="black"><FontAwesomeIcon icon={faGlobeAmericas} />   TOP 10 </Text>
-                    </Heading>
-                    <>
-                        <List size="" p="">
-                            {list.map((i, c) =>
-                                <li key={c} className="drac-text drac-text-white">
-                                    <Text color="black"> {c + 1}º <b>{i.word}</b>
+                <Heading p="sm" >
+                    <Text color="black"><FontAwesomeIcon icon={faGlobeAmericas} />   TOP 10 </Text>
+                </Heading>
+                <>
+                    <List size="" p="">
+                        {list.map((i, c) =>
+                            <li key={c} className="drac-text drac-text-white">
+                                <Text color="black"> {c + 1}º <b>{i.word}</b>
                                     ({(
-                                            (i.count / list
-                                                .reduce((a, b) => a + b.count, 0)) * 100).toFixed(2)
-                                        }%)</Text>
-                                </li>
-                            )}
-                        </List>
-                    </>
-                </Card>
-            <Box className="bigCard"
-                color="" m="sm" >
+                                        (i.count / list
+                                            .reduce((a, b) => a + b.count, 0)) * 100).toFixed(2)
+                                    }%)</Text>
+                            </li>
+                        )}
+                    </List>
+                </>
+            </Card>
+            <Card className="bigCard"
+                    color="" m="sm" >
 
-                <Box style={{
-                    width: "100%",
-                    float: "left"
-                }}>
                     {montaGrafico(data)}
-                </Box>
-            </Box>
+               
+            </Card>
         </Box>
     )
 }

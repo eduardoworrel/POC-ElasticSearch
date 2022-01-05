@@ -132,7 +132,8 @@ namespace Api.Controllers
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
-            );
+                .Size(1000)
+                      );
 
             var pages = (List<Page>)searchResponse.Documents;
 

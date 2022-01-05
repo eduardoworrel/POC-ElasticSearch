@@ -4,6 +4,7 @@ module.exports = {
         for(keyValue of collection){
             axios.post('http://eduardoworrel:5001/Page/Store', keyValue)
             .catch(function (error) {
+                console.log(error);
                 console.log(error.response.data);
             })
 

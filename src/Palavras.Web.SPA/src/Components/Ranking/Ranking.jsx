@@ -34,7 +34,6 @@ const Ranking = () => {
     const [data, setData] = useState(0);
     const [atualizacao, setAtualizacao] = useState("Carregando..");
 
-   
     const load = () => {
         fetch(UrlRank).then(a => a.json()).then((a) => {
             setList(a)
@@ -90,10 +89,7 @@ const Ranking = () => {
                 marginTop: "50px",
                 marginBottom: "50px"
             }}>Palavras mais citadas nos sites de notícia</Heading>
-            <Card style={{
-                width: "22%",
-                float: "left"
-            }}
+            <Card className="smallCard"
                 variant="subtle"
                 color="pink" m="sm" p="sm">
 
@@ -108,13 +104,8 @@ const Ranking = () => {
                 </div>
             </Card>
             {group.map((i, c) =>
-                <Card key={c} style={{
-                    width: "22%",
-                    float: "left"
-                }}
+                <Card key={c} className="smallCard"
                     color="pinkPurple" m="sm" p="sm">
-
-
                     <div >
                         <Heading p="sm" size="sm">
                             <Text color="black"> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
@@ -133,19 +124,8 @@ const Ranking = () => {
                     </div>
                 </Card>
             )}
-            <Box style={{
-                width: "96%",
-                float: "left",
-                padding: "20px",
-                background: "rgba(255,255,255,1)",
-                borderRadius: "10px"
-            }}
-                color="" m="sm" >
 
-                <Card style={{
-                    width: "30%",
-                    float: "left"
-                }}
+<Card className="smallCard"
                     color="pink" m="sm" p="sm">
 
                     <Heading p="sm" >
@@ -165,8 +145,11 @@ const Ranking = () => {
                         </List>
                     </>
                 </Card>
+            <Box className="bigCard"
+                color="" m="sm" >
+
                 <Box style={{
-                    width: "39%",
+                    width: "100%",
                     float: "left"
                 }}>
                     {montaGrafico(data)}

@@ -16,9 +16,9 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-                      builder =>
+                      OpBuilder =>
                       {
-                          builder.WithOrigins("http://eduardoworrel.com","http://eduardoworrel.com:81");
+                          OpBuilder.WithOrigins(builder.Configuration.GetSection("AllowedHosts").Value,"localhost");
                       });
 });
 

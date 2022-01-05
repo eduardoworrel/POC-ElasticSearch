@@ -12,15 +12,26 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class PageController : ControllerBase
     {
+        private IConfiguration configuration;
+        public PageController(IConfiguration _configuration)
+        {
+            configuration = _configuration;
+                
+        }
 
         [HttpPost]
         [Route("Store")]
         public Page Store(Page page)
         {
-            page.Datahora = DateTime.Now;
- 
-            var client = ElasticService.GetClient("bruto");
+            var acess = new ElasticAcess
+            {
+                url = configuration.GetSection("ElasticUrl").Value,
+                user = configuration.GetSection("ElasticUser").Value,
+                pass = configuration.GetSection("ElasticPass").Value
+            };
+            var client = ElasticService.GetClient(acess, "bruto");
 
+            page.Datahora = DateTime.Now;
             var indexResponse = client.IndexDocument(page);
 
             return page;
@@ -31,8 +42,13 @@ namespace Api.Controllers
         [Route("GetUltimaAtualizacao")]
         public string GetUltimaAtualizacao()
         {
-
-            var client = ElasticService.GetClient("bruto");
+            var acess = new ElasticAcess
+            {
+                url = configuration.GetSection("ElasticUrl").Value,
+                user = configuration.GetSection("ElasticUser").Value,
+                pass = configuration.GetSection("ElasticPass").Value
+            };
+            var client = ElasticService.GetClient(acess,"bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
@@ -53,8 +69,13 @@ namespace Api.Controllers
         public IEnumerable<Page> Get()
         {
 
- 
-            var client = ElasticService.GetClient("bruto");
+            var acess = new ElasticAcess
+            {
+                url = configuration.GetSection("ElasticUrl").Value,
+                user = configuration.GetSection("ElasticUser").Value,
+                pass = configuration.GetSection("ElasticPass").Value
+            };
+            var client = ElasticService.GetClient(acess,"bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
@@ -73,8 +94,13 @@ namespace Api.Controllers
 
 
             List<PageWordCount> result = new List<PageWordCount>();
-
-            var client = ElasticService.GetClient("bruto");
+            var acess = new ElasticAcess
+            {
+                url = configuration.GetSection("ElasticUrl").Value,
+                user = configuration.GetSection("ElasticUser").Value,
+                pass = configuration.GetSection("ElasticPass").Value
+            };
+            var client = ElasticService.GetClient(acess,"bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
@@ -96,8 +122,13 @@ namespace Api.Controllers
 
 
             List<WordCount> result = new List<WordCount>();
-
-            var client = ElasticService.GetClient("bruto");
+            var acess = new ElasticAcess
+            {
+                url = configuration.GetSection("ElasticUrl").Value,
+                user = configuration.GetSection("ElasticUser").Value,
+                pass = configuration.GetSection("ElasticPass").Value
+            };
+            var client = ElasticService.GetClient(acess,"bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)

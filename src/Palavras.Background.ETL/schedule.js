@@ -16,4 +16,4 @@ async function start(){
     await start();
  })
 
-//start().catch();
+start().catch();

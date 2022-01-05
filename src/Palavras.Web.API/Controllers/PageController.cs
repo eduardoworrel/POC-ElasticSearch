@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Nest;
 using Services;
 namespace Api.Controllers
 {
@@ -16,7 +10,7 @@ namespace Api.Controllers
         public PageController(IConfiguration _configuration)
         {
             configuration = _configuration;
-                
+
         }
 
         [HttpPost]
@@ -48,7 +42,7 @@ namespace Api.Controllers
                 user = configuration.GetSection("ElasticUser").Value,
                 pass = configuration.GetSection("ElasticPass").Value
             };
-            var client = ElasticService.GetClient(acess,"bruto");
+            var client = ElasticService.GetClient(acess, "bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
@@ -75,10 +69,11 @@ namespace Api.Controllers
                 user = configuration.GetSection("ElasticUser").Value,
                 pass = configuration.GetSection("ElasticPass").Value
             };
-            var client = ElasticService.GetClient(acess,"bruto");
+            var client = ElasticService.GetClient(acess, "bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
+                .Size(1000)
             );
 
             var pages = searchResponse.Documents;
@@ -100,10 +95,11 @@ namespace Api.Controllers
                 user = configuration.GetSection("ElasticUser").Value,
                 pass = configuration.GetSection("ElasticPass").Value
             };
-            var client = ElasticService.GetClient(acess,"bruto");
+            var client = ElasticService.GetClient(acess, "bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)
+                .Size(1000)
             );
 
             var pages = (List<Page>)searchResponse.Documents;
@@ -128,7 +124,7 @@ namespace Api.Controllers
                 user = configuration.GetSection("ElasticUser").Value,
                 pass = configuration.GetSection("ElasticPass").Value
             };
-            var client = ElasticService.GetClient(acess,"bruto");
+            var client = ElasticService.GetClient(acess, "bruto");
 
             var searchResponse = client.Search<Page>(s => s
                 .From(0)

@@ -4,7 +4,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "Api", Version = "v1" });
@@ -21,6 +20,8 @@ builder.Services.AddCors(options =>
                           OpBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                       });
 });
+
+builder.Services.AddControllers();
 
 var app = builder.Build();
 

@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
                       builder =>
                       {
-                          builder.WithOrigins("http://localhost","http://localhost:81");
+                          builder.WithOrigins("http://eduardoworrel","http://eduardoworrel:81");
                       });
 });
 

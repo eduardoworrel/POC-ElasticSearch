@@ -44,7 +44,7 @@ namespace Services
                 && i.Word != "o"
                 && i.Word != "com"
                 && i.Word != "2") // transformação precisa melhorar 
-                .Take(5)
+                .Take(7)
                 .ToList();
 
                 PageWordCount.WordCounts.AddRange(WordGroups ?? new List<WordCount> { });
@@ -85,7 +85,7 @@ namespace Services
             && i.Word != "com"
             && i.Word != "o"
             && i.Word != "2") // reaply blacklist?
-            .Take(15)
+            .Take(10)
             .ToList();
 
             listWordCount.AddRange(WordGroups ?? new List<WordCount> { });         

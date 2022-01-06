@@ -48,6 +48,8 @@ namespace Api.Controllers
                 pass = configuration.GetSection("ElasticPass").Value
             };
             var client = ElasticService.GetClient(acess, "refinado");
+            client.Indices.Delete("refinado");
+
 
             WordRefined.Datahora = DateTime.Now;
             var indexResponse = client.IndexDocument(WordRefined);

@@ -37,6 +37,23 @@ namespace Api.Controllers
             return page;
 
         }
+        [HttpPost]
+        [Route("StoreWord")]
+        public WordRefined StoreWord(WordRefined WordRefined)
+        {
+            var acess = new ElasticAcess
+            {
+                url = configuration.GetSection("ElasticUrl").Value,
+                user = configuration.GetSection("ElasticUser").Value,
+                pass = configuration.GetSection("ElasticPass").Value
+            };
+            var client = ElasticService.GetClient(acess, "refinado");
+
+            WordRefined.Datahora = DateTime.Now;
+            var indexResponse = client.IndexDocument(WordRefined);
+            
+            return WordRefined;
+        }
 
         [HttpGet]
         [Route("GetUltimaAtualizacao")]
@@ -64,6 +81,29 @@ namespace Api.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetRefined")]
+        public IEnumerable<WordRefined> GetRefined()
+        {
+
+            var acess = new ElasticAcess
+            {
+                url = configuration.GetSection("ElasticUrl").Value,
+                user = configuration.GetSection("ElasticUser").Value,
+                pass = configuration.GetSection("ElasticPass").Value
+            };
+            var client = ElasticService.GetClient(acess, "refinado");
+
+            var searchResponse = client.Search<WordRefined>(s => s
+                .From(0)
+                .Size(1000)
+            );
+
+            var words = searchResponse.Documents;
+
+            return words;
+
+        }
         [HttpGet]
         [Route("Get")]
         public IEnumerable<Page> Get()

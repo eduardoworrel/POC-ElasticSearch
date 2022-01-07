@@ -39,7 +39,7 @@ namespace Api.Controllers
         }
         [HttpPost]
         [Route("StoreWord")]
-        public WordRefined StoreWord(WordRefined WordRefined)
+        public List<WordRefined> StoreWord(List<WordRefined> WordRefineds)
         {
             var acess = new ElasticAcess
             {
@@ -48,13 +48,13 @@ namespace Api.Controllers
                 pass = configuration.GetSection("ElasticPass").Value
             };
             var client = ElasticService.GetClient(acess, "refinado");
-            client.Indices.Delete("refinado");
-
-
-            WordRefined.Datahora = DateTime.Now;
-            var indexResponse = client.IndexDocument(WordRefined);
-            
-            return WordRefined;
+            foreach(var word in WordRefineds)
+            {
+                word.Datahora = DateTime.Now;
+                var indexResponse = client.IndexDocument(word);
+            }
+          
+            return WordRefineds;
         }
 
         [HttpGet]

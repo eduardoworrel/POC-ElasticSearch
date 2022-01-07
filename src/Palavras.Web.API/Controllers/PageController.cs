@@ -47,7 +47,9 @@ namespace Api.Controllers
                 user = configuration.GetSection("ElasticUser").Value,
                 pass = configuration.GetSection("ElasticPass").Value
             };
+            
             var client = ElasticService.GetClient(acess, "refinado");
+            await client.Indices.DeleteAsync("refinado");
             foreach(var word in WordRefineds)
             {
                 word.Datahora = DateTime.Now;

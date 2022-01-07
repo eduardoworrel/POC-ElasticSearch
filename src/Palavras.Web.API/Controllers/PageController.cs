@@ -38,6 +38,22 @@ namespace Api.Controllers
 
         }
         [HttpPost]
+        [Route("Clear")]
+        public void Clear(List<WordRefined> WordRefineds)
+        {
+            var acess = new ElasticAcess
+            {
+                url = configuration.GetSection("ElasticUrl").Value,
+                user = configuration.GetSection("ElasticUser").Value,
+                pass = configuration.GetSection("ElasticPass").Value
+            };
+
+            var client = ElasticService.GetClient(acess, "refinado");
+
+            client.Indices.Delete("refinado");
+        }
+
+        [HttpPost]
         [Route("StoreWord")]
         public List<WordRefined> StoreWord(List<WordRefined> WordRefineds)
         {
@@ -47,12 +63,12 @@ namespace Api.Controllers
                 user = configuration.GetSection("ElasticUser").Value,
                 pass = configuration.GetSection("ElasticPass").Value
             };
-            
+
             var client = ElasticService.GetClient(acess, "refinado");
 
             client.Indices.Delete("refinado");
-            
-            foreach(var word in WordRefineds)
+
+            foreach (var word in WordRefineds)
             {
                 word.Datahora = DateTime.Now;
                 var indexResponse = client.IndexDocument(word);

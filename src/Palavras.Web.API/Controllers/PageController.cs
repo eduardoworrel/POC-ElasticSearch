@@ -49,7 +49,9 @@ namespace Api.Controllers
             };
             
             var client = ElasticService.GetClient(acess, "refinado");
-            await client.Indices.DeleteAsync("refinado");
+
+            client.Indices.Delete("refinado");
+            
             foreach(var word in WordRefineds)
             {
                 word.Datahora = DateTime.Now;

@@ -1,6 +1,6 @@
 const {extract} = require('./Extract/extract');
-const {transform} = require('./Transform/transform');
-const {load} = require('./Load/load');
+const {transform} = require('./Transform/Bruto/transform');
+const {load} = require('./Load/Bruto/load');
 
 const cron = require("node-cron");
 
@@ -12,8 +12,7 @@ async function start(){
         console.log(e)
     } 
 }
- cron.schedule("00 00 00,6,12,18 * * *", async () => {
+cron.schedule("00 00 00,6,12,18 * * *", async () => {
     await start();
  })
-
 start().catch();

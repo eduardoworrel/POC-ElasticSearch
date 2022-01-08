@@ -1,8 +1,8 @@
 using System;
 
-namespace Api
+namespace Palavras.Web.API.Models
 {
-    public class WordRefined
+    public class PalavraRefinada
     {
         public string? Site { get; set; }    
         public string? Word { get; set; }    

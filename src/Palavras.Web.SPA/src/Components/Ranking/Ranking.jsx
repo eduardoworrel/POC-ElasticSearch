@@ -57,13 +57,13 @@ const Ranking = () => {
                         variant="subtle" color="pinkPurple" m="sm" p="sm">
                         <div >
                             <Heading p="sm" size="sm">
-                                <Text color="black"> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
+                                <Text> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
                             </Heading>
                             <Box>
                                 {
                                     i.palavras.map((wordCount, count) =>
                                         <div key={count} className="drac-text drac-text-white">
-                                            <Text color="black"> {count + 1}º <b>{wordCount.palavra}
+                                            <Text> {count + 1}º <b>{wordCount.palavra}
                                             </b> ({((wordCount.frequencia / i.palavras
                                                 .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%)</Text>
                                         </div>
@@ -87,7 +87,7 @@ const Ranking = () => {
                             <List size="" p="">
                                 {list.map((i, c) =>
                                     <li key={c} className="drac-text drac-text-white">
-                                        <Text color="black"> {c + 1}º <b>{i.palavra}</b>
+                                        <Text> {c + 1}º <b>{i.palavra}</b>
                                     ({(
                                                 (i.frequencia / list
                                                     .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)

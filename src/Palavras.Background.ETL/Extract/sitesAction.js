@@ -14,7 +14,7 @@ const globo = async (page) => {
     });
 
     return {
-        key: 'globo.com',
+        key: 'g1.globo.com',
         data: pageText
     }
 }

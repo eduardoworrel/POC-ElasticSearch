@@ -14,24 +14,11 @@ import { PolarArea } from 'react-chartjs-2';
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
-const UrlUltimaAtualizacao = "https://palavras-api.eduardoworrel.com/Page/GetUltimaAtualizacao"
-const UrlRank = "https://palavras-api.eduardoworrel.com/Page/GetRank"
-const UrlGroup = "https://palavras-api.eduardoworrel.com/Page/GetGroups"
+const UrlUltimaAtualizacao = "https://palavras-api.eduardoworrel.com/PageWord/GetUltimaAtualizacao"
+const UrlRank = "https://palavras-api.eduardoworrel.com/PageWord/GetRank"
+const UrlGroup = "https://palavras-api.eduardoworrel.com/PageWord/GetGroups"
 function montaGrafico(data) {
-    var options = {
-
-        legend: {
-            display: false
-        },
-        tooltips: {
-            callbacks: {
-                label: function (tooltipItem) {
-                    return tooltipItem.yLabel;
-                }
-            }
-        }
-    }
-
+   
     if (data != 0)
         return (
             <>
@@ -86,7 +73,7 @@ const Ranking = () => {
                 labels: labels,
                 datasets: [
                     {
-                        label: '# of Votes',
+                        label: '#',
                         data: data,
                         backgroundColor: colors,
 
@@ -117,7 +104,6 @@ const Ranking = () => {
                 variant="subtle"
                 color="pink" m="sm" p="sm">
 
-
                 <div >
                     <Heading p="sm" size="sm">
                         <Text color="white"> <FontAwesomeIcon icon={faCube} /></Text>
@@ -138,8 +124,8 @@ const Ranking = () => {
                             {
                                 i.wordCounts.map((wordCount, count) =>
                                     <div key={count} className="drac-text drac-text-white">
-                                        <Text color="black"> {count + 1}º <b>{wordCount.word}
-                                        </b> ({((wordCount.count / i.wordCounts
+                                        <Text color="black"> {count + 1}º <b>{wordCount.palavra}
+                                        </b> ({((wordCount.frequencia / i.wordCounts
                                             .reduce((a, b) => a + b.count, 0)) * 100).toFixed(2)}%)</Text>
                                     </div>
                                 )
@@ -159,10 +145,10 @@ const Ranking = () => {
                     <List size="" p="">
                         {list.map((i, c) =>
                             <li key={c} className="drac-text drac-text-white">
-                                <Text color="black"> {c + 1}º <b>{i.word}</b>
+                                <Text color="black"> {c + 1}º <b>{i.palavra}</b>
                                     ({(
                                         (i.count / list
-                                            .reduce((a, b) => a + b.count, 0)) * 100).toFixed(2)
+                                            .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)
                                     }%)</Text>
                             </li>
                         )}

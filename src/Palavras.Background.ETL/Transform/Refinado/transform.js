@@ -30,6 +30,7 @@ module.exports = {
             let splitData = newData
             .replace(/(\r\n|\n|\r)/gm, "  ")
             .replace(/\./g, ' ')
+            .replace(/:/g, ' ')
             .replace(/,/g, ' ')
             .replace(/'/g, ' ')
             .replace(/"/g, ' ')

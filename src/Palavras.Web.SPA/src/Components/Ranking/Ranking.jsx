@@ -9,7 +9,7 @@ import env from "react-dotenv";
 
 const UrlUltimaAtualizacao = env.API + "/PageWord/GetUltimaAtualizacao"
 const UrlRank = env.API + "/PageWord/GetRank"
-const UrlGroup = env.API + "PageWord/GetGroups"
+const UrlGroup = env.API + "/PageWord/GetGroups"
 
 const Ranking = () => {
     const [list, setList] = useState([]);

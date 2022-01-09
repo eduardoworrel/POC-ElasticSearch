@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobeAmericas, faCube, faCubes } from '@fortawesome/free-solid-svg-icons'
 import { Puff } from 'react-loading-icons'
 import { PolarAreaWithoutLegend } from "../Chart/PolarAreaWithoutLegend";
-require('dotenv').config()
 
-const UrlUltimaAtualizacao = process.env.API + "/PageWord/GetUltimaAtualizacao"
-const UrlRank = process.env.API + "/PageWord/GetRank"
-const UrlGroup = process.env.API + "PageWord/GetGroups"
+import env from "react-dotenv";
+
+const UrlUltimaAtualizacao = env.API + "/PageWord/GetUltimaAtualizacao"
+const UrlRank = env.API + "/PageWord/GetRank"
+const UrlGroup = env.API + "PageWord/GetGroups"
 
 const Ranking = () => {
     const [list, setList] = useState([]);

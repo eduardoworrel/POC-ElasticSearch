@@ -33,7 +33,6 @@ namespace Services
             }
             return listGrupo;
         }
-
         public static List<PalavraFinal> ProcessaRank(List<PalavraRefinada> words, int take)
         {
             var group = words.GroupBy((word) => word.Word);
@@ -46,6 +45,19 @@ namespace Services
                     Frequencia = g.Sum(f => f.Count),
                     Porcentagem = String.Format("{0:0.00}", (g.Sum(f => f.Count) / porcentagem)),
                     Classe = g.First().Class
+                })
+                .Where(e =>
+                {
+                    foreach(var c in PageWordService.ProcessaClasses(words))
+                    {
+                        if(e.Classe != null) { 
+                            if (e.Classe != "?" && e.Classe.Contains(c))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                    return true; 
                 })
                 .OrderByDescending(e => e.Frequencia)
                 .Take(take)

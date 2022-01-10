@@ -1,12 +1,12 @@
-const globo = async (page) => {
-    await page.goto("https://globo.com");
+const g1 = async (page) => {
+    await page.goto("https://g1.globo.com");
     const pageText = await page.evaluate(() => {
         const _document = document;
         [
-            "#header-section",
-            ".footer-container",
-            ".footer_links",
-            "#banner_vitrine"
+            "#glb-topo",
+            "#banner_vitrine",
+            "script",
+            "style"
         ].forEach((selector) => {
             _document.querySelector(selector).remove()
         });
@@ -23,7 +23,9 @@ const uol = async (page) => {
     const pageText = await page.evaluate(() => {
         const _document = document;
         [
-          ".header"
+          ".header",
+          "script",
+          "style"
         ].forEach((selector) => {
             _document.querySelector(selector).remove()
         });
@@ -39,7 +41,11 @@ const cnnbrasil = async (page) => {
     await page.goto("https://www.cnnbrasil.com.br");
     const pageText = await page.evaluate(() => {
         const _document = document;
-        [".header__group","footer"].forEach((selector) => {
+        [".header__group"
+        ,"footer",
+        "script",
+        "style"
+        ].forEach((selector) => {
             _document.querySelector(selector).remove()
         });
         return _document.querySelector("body").innerText;
@@ -94,7 +100,7 @@ const cnnbrasil = async (page) => {
 //     }
 // }
 module.exports = {
-    globo,
+    g1,
     uol,
     cnnbrasil,
     // jovempan,

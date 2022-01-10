@@ -17,17 +17,15 @@ function groupBy(list, keyGetter) {
 }
 
 module.exports = {
-    transform: async (collection) => {
-        //remove pronomes e conectores 
+    transform: async (keyValue) => {
         WordList = [];
-        for (keyValue of collection) {
-            const analise = {
-                site : keyValue.key,
-                palavras: 0,
-                semClasse: 0
-            }
-            let newData = keyValue.data.toUpperCase();
-            let splitData = newData
+        const analise = {
+            site: keyValue.key,
+            palavras: 0,
+            semClasse: 0
+        }
+        let newData = keyValue.data.toUpperCase();
+        let splitData = newData
             .replace(/(\r\n|\n|\r)/gm, "  ")
             .replace(/\./g, ' ')
             .replace(/:/g, ' ')
@@ -36,45 +34,45 @@ module.exports = {
             .replace(/"/g, ' ')
             .split(whiteSpace);
 
-            splitData = splitData.filter(function (el) {
-                return el != '';
-            });
+        splitData = splitData.filter(function (el) {
+            return el != '';
+        });
 
-            const group = groupBy(splitData, (item) => item);
+        const group = groupBy(splitData, (item) => item);
 
-            for (let wordArray of group) {
-                const urlRequest = url + wordArray[0];
+        for (let wordArray of group) {
+            const urlRequest = url + wordArray[0];
 
-                try {
-                    const {data} = await axios.get(encodeURI(urlRequest));
+            try {
+                const {
+                    data
+                } = await axios.get(encodeURI(urlRequest));
 
-                    if (data[0].class) {
-                        let newWord = {
-                            site: keyValue.key,
-                            word: wordArray[0],
-                            class: data[0].class,
-                            count: wordArray[1].length,
-                        }
-                        WordList.push(newWord);
-                        analise.palavras += 1;
-                    }else{
-                        throw new Error('sem class');
-                    }
-                } catch (e) {
-                    
+                if (data[0].class) {
                     let newWord = {
                         site: keyValue.key,
                         word: wordArray[0],
-                        class: '?',
+                        class: data[0].class,
                         count: wordArray[1].length,
                     }
                     WordList.push(newWord);
                     analise.palavras += 1;
-                    analise.semClasse += 1;
+                } else {
+                    throw new Error('sem class');
                 }
+            } catch (e) {
+
+                let newWord = {
+                    site: keyValue.key,
+                    word: wordArray[0],
+                    class: '?',
+                    count: wordArray[1].length,
+                }
+                WordList.push(newWord);
+                analise.palavras += 1;
+                analise.semClasse += 1;
             }
-            console.log(`${analise.site}: ${analise.semClasse} palavras sem classe de ${analise.palavras} `)
         }
-        return WordList;
+        return {transformed: WordList, analise};
     }
 }

@@ -2,4 +2,9 @@
 
 - Pequeno sistema que coleta dados das principais páginas de noticiário e gera um ranking das palavras mais citadas
 
-- Disponível em [Palavras](https://palavras.eduardoworrel.com)
+- Disponível em [palavras.eduardoworrel.com](https://palavras.eduardoworrel.com)
+
+# Como funciona
+
+![alt text](https://ray.so/?title=schedule.refinado.js&theme=breeze&spacing=32&background=false&darkMode=true&code=Y29uc3Qge2V4dHJhY3R9ID0gcmVxdWlyZSgnLi9FeHRyYWN0L2V4dHJhY3QnKTsKY29uc3Qge3RyYW5zZm9ybX0gPSByZXF1aXJlKCcuL1RyYW5zZm9ybS9SZWZpbmFkby90cmFuc2Zvcm0nKTsKY29uc3Qge2xvYWR9ID0gcmVxdWlyZSgnLi9Mb2FkL1JlZmluYWRvL2xvYWQnKTsKCnRyeXsKICBjb25zdCBleHRyYWN0ZWQgPSBhd2FpdCBleHRyYWN0KCk7CiAgCiAgZm9yKGxldCBzaXRlQ29sbGVjdGlvbiBvZiBleHRyYWN0ZWQpewogICAgCiAgCWNvbnN0IHt0cmFuc2Zvcm1lZCwgYW5hbGlzZX0gPSBhd2FpdCB0cmFuc2Zvcm0oc2l0ZUNvbGxlY3Rpb24pOwogICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgbG9hZCh0cmFuc2Zvcm1lZCk7CiAgfQp9Y2F0Y2goZXJyKXt9&language=javascript)
+-

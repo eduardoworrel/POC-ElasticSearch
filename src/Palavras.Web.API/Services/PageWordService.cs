@@ -26,7 +26,7 @@ namespace Services
                            Count = w.Count,
                            Datahora = w.Datahora,
                            Site = w.Site
-                       }).ToList(), 7)
+                       }).ToList(), 10)
                 };
 
                 listGrupo.Add(grupo);

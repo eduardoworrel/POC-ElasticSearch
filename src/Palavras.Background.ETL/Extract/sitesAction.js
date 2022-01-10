@@ -8,7 +8,9 @@ const g1 = async (page) => {
             "script",
             "style"
         ].forEach((selector) => {
-            _document.querySelector(selector).remove()
+            for(let e of _document.querySelectorAll(selector)){
+                e.remove();
+            }
         });
         return _document.querySelector("body").innerText;
     });
@@ -27,7 +29,9 @@ const uol = async (page) => {
           "script",
           "style"
         ].forEach((selector) => {
-            _document.querySelector(selector).remove()
+            for(let e of _document.querySelectorAll(selector)){
+                e.remove();
+            }
         });
         return _document.querySelector("body").innerText;
     });
@@ -45,10 +49,16 @@ const google = async (page) => {
         [
           ".gb_Fc",
           ".SbZred",
+          ".gb_4d",
+          "span",
+          "header",
+          "menu",
           "script",
           "style"
         ].forEach((selector) => {
-            _document.querySelector(selector).remove()
+            for(let e of _document.querySelectorAll(selector)){
+                e.remove();
+            }
         });
         return _document.querySelector("body").innerText;
     });
@@ -67,7 +77,9 @@ const cnnbrasil = async (page) => {
         "script",
         "style"
         ].forEach((selector) => {
-            _document.querySelector(selector).remove()
+            for(let e of _document.querySelectorAll(selector)){
+                e.remove();
+            }
         });
         return _document.querySelector("body").innerText;
     });
@@ -86,10 +98,14 @@ const jovempan = async (page) => {
             "#footer",
             ".container-panflix-collection",
             ".podcasts-header-home",
-            ".container-follow-apps"
+            ".container-follow-apps",
+            "script",
+            "style"
 
         ].forEach((selector) => {
-            _document.querySelector(selector).remove()
+            for(let e of _document.querySelectorAll(selector)){
+                e.remove();
+            }
         });
         return _document.querySelector("body").innerText;
     });
@@ -107,10 +123,14 @@ const terra = async (page) => {
             [
                 ".table-ad",
                 "#zaz-app-t360-navbar",
-                ".open-menu-t360"
+                ".open-menu-t360",
+                "script",
+                "style"
               
             ].forEach((selector) => {
-                _document.querySelector(selector).remove()
+                for(let e of _document.querySelectorAll(selector)){
+                    e.remove();
+                }
             });
 
         return _document.querySelector("body").innerText;

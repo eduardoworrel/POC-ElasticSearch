@@ -142,7 +142,7 @@ const terra = async (page) => {
     }
 }
 module.exports = {
-    g1,
+    //g1,
     uol,
     cnnbrasil,
     google,

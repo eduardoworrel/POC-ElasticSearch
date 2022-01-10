@@ -23,7 +23,7 @@ async function start(){
         for(let siteCollection of extracted){
             console.log("\n Transformação iniciada")
             timeToCount = new Date();
-            let {transformed, analise} = await transform(siteCollection);
+            const {transformed, analise} = await transform(siteCollection);
 
             console.log("\n Transformação:")
             console.log("\n - Duração: " +  duration())

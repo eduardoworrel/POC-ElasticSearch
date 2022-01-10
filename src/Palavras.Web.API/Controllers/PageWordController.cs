@@ -91,7 +91,7 @@ namespace Api.Controllers
 
             var searchResponse = client.Search<PalavraRefinada>(s => s
                 .From(0)
-                .Size(1000)
+                .Size(10000)
                       );
 
             var pages = (List<PalavraRefinada>)searchResponse.Documents;
@@ -110,7 +110,7 @@ namespace Api.Controllers
             
             var searchResponse = client.Search<PalavraRefinada>(s => s
                 .From(0)
-                .Size(1000)
+                .Size(10000)
             );
 
             var pages = (List<PalavraRefinada>)searchResponse.Documents;

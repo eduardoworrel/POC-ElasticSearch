@@ -85,7 +85,7 @@ const Ranking = () => {
                 <Box style={{ display: "flex", flexFlow: "row wrap", }}>
                     <Box style={{ flex: "1", }}>
                         <Card
-                            variant="subtle" color="pink" m="sm" p="sm">
+                            variant="subtle" color="pink" m="xs" p="sm">
                             {list.length ?
                                 <>
 
@@ -108,7 +108,7 @@ const Ranking = () => {
                         </Card>
                         <Card
                             variant="subtle"
-                            color="pink" m="sm" p="sm">
+                            color="pink" m="xs" p="sm">
 
                             <div>
                                 <Heading p="sm" size="sm">
@@ -127,7 +127,7 @@ const Ranking = () => {
                     </Box>
 
                     <Card style={{ flex: "3",  }}
-                        variant="subtle" color="pink" >
+                        variant="subtle" color="pink" m="xs" >
                         <Box style={{width: "60%", margin:"10px auto"}}>
 
                             {list.length ?

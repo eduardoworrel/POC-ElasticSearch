@@ -78,12 +78,12 @@ const Ranking = () => {
                     </>
                 </Box>
 
-                <Heading size="xl">
+                <Heading size="xl" style={{marginTop:"75px"}}>
                     <FontAwesomeIcon icon={faGlobeAmericas} /> TOP 10
                 </Heading>
                 <Divider color="pink" />
-                <Box>
-                    <Box className="smallCard">
+                <Box style={{ display: "flex", flexFlow: "row wrap", }}>
+                    <Box style={{ flex: "1", }}>
                         <Card
                             variant="subtle" color="pink" m="sm" p="sm">
                             {list.length ?
@@ -126,28 +126,30 @@ const Ranking = () => {
                         </Card>
                     </Box>
 
-                    <Card className="bigCard"
-                        variant="subtle" color="pink" m="sm" >
+                    <Card style={{ flex: "3",  }}
+                        variant="subtle" color="pink" >
+                        <Box style={{width: "60%", margin:"10px auto"}}>
 
-                        {list.length ?
-                            <PolarAreaWithoutLegend list={list}></PolarAreaWithoutLegend>
-                            :
-                            <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>
-                        }
+                            {list.length ?
+                                <PolarAreaWithoutLegend list={list}></PolarAreaWithoutLegend>
+                                :
+                                <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>
+                            }
+                        </Box>
                     </Card>
 
 
 
                 </Box>
-              
-                 <Heading size="xl">
+
+                <Heading size="xl" style={{marginTop:"75px"}}>
                     <FontAwesomeIcon icon={faGlobeAmericas} /> TOP 10 CADA SITE
                     </Heading>
                 <Divider color="yellow" />
-                <Box>
+                <Box  style={{ display: "flex", flexFlow: "row wrap"}}>
                     {group.map((i, c) =>
-                        <Card key={c} className="smallCard"
-                            variant="subtle" color="yellow" m="sm" p="sm">
+                        <Card m="xs" key={c} style={{flex:"1"}}
+                            variant="subtle" color="yellow" p="sm">
                             <div >
                                 <Heading p="sm" size="sm">
                                     <Text> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
@@ -168,9 +170,9 @@ const Ranking = () => {
                     )}
 
                 </Box>
-                
-            
-            </Box>
+
+
+            </Box >
         </>
     )
 }

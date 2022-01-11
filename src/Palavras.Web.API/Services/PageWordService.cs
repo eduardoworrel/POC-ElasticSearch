@@ -66,9 +66,9 @@ namespace Services
             return listWord;
 
         }
-        public static List<string> ProcessaClasses(List<PalavraRefinada> words)
+        public static List<ClassesDePalavras> ProcessaClasses(List<PalavraRefinada> words)
         {
-            List<string> list = new();
+            List<ClassesDePalavras> list = new();
 
           
             var groupWord = words.GroupBy((word) => word.Class);
@@ -76,7 +76,10 @@ namespace Services
             foreach (var types in groupWord)
             {
                 var range = types.Key?.Split(new string[] { ",", " e" }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(i => i.TrimStart())
+                    .Select((i) => new ClassesDePalavras {
+                    Classe = i.TrimStart(),
+                    Quantidade = types.Count()
+                    })
                     .ToList();
                 list.AddRange(range);
             }

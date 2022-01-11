@@ -84,8 +84,7 @@ namespace Services
                 list.AddRange(range);
             }
 
-            var groupClass = list.GroupBy(e => e);
-            return groupClass.Select(i => i.Key).ToList();
+            return list.OrderBy(e => e.Classe.Length).ToList();
 
         }
     }

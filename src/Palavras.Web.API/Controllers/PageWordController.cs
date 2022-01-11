@@ -84,10 +84,10 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("GetClasses")]
-        public List<string?> GetClasses()
+        public List<ClassesDePalavras> GetClasses()
         {
 
-            List<string?> result = new();
+            List<ClassesDePalavras> result = new();
 
             var searchResponse = client.Search<PalavraRefinada>(s => s
                 .From(0)

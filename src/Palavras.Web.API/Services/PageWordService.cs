@@ -77,9 +77,9 @@ namespace Services
             {
                 var range = types.Key?.Split(new string[] { ",", " e" }, StringSplitOptions.RemoveEmptyEntries)
                     .Select((i) => new ClassesDePalavras {
-                    Classe = i.TrimStart(),
-                    Quantidade = types.Count()
-                    })
+                        Classe = i.TrimStart(),
+                        Quantidade = types.Count()
+                        })
                     .ToList();
                 list.AddRange(range);
             }

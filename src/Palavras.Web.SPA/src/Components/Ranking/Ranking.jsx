@@ -148,7 +148,7 @@ const Ranking = () => {
                 <Divider color="yellow" />
                 <Box  style={{ display: "flex", flexFlow: "row wrap"}}>
                     {group.map((i, c) =>
-                        <Card m="xs" key={c} style={{flex:"1"}}
+                        <Card m="xs" key={c} style={{flex:"2"}}
                             variant="subtle" color="yellow" p="sm">
                             <div >
                                 <Heading p="sm" size="sm">

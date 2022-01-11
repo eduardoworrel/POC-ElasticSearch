@@ -71,7 +71,7 @@ namespace Services
             List<ClassesDePalavras> list = new();
 
           
-            var groupWord = words.GroupBy((word) => word.Class.TrimStart());
+            var groupWord = words.GroupBy((word) => word.Class);
 
             foreach (var types in groupWord)
             {
@@ -84,7 +84,15 @@ namespace Services
                 list.AddRange(range);
             }
 
-            return list.OrderBy(e => e.Classe.Length).ToList();
+            return list
+            .GroupBy((word) => word.Classe).Select((g) =>
+                new ClassesDePalavras
+                {
+                    Classe = g.Key,
+                    Quantidade = g.Count()
+                })
+            .OrderBy(e => e.Classe.Length)
+            .ToList();
 
         }
     }

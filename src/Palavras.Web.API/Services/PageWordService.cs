@@ -71,7 +71,7 @@ namespace Services
             List<ClassesDePalavras> list = new();
 
           
-            var groupWord = words.GroupBy((word) => word.Class);
+            var groupWord = words.GroupBy((word) => word.Class.TrimStart());
 
             foreach (var types in groupWord)
             {

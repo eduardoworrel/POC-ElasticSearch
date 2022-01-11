@@ -1,10 +1,20 @@
-# Palavras. NodeJS + Puppeteer, Elastic Stack & .NET 6
+# Palavras mais citadas
 
 - Pequeno sistema que coleta dados das principais páginas de noticiário e gera um ranking das palavras mais citadas
 
 - Disponível em [palavras.eduardoworrel.com](https://palavras.eduardoworrel.com)
 
 # Como funciona
-
-![alt text](https://ray.so/?title=schedule.refinado.js&theme=breeze&spacing=32&background=false&darkMode=true&code=Y29uc3Qge2V4dHJhY3R9ID0gcmVxdWlyZSgnLi9FeHRyYWN0L2V4dHJhY3QnKTsKY29uc3Qge3RyYW5zZm9ybX0gPSByZXF1aXJlKCcuL1RyYW5zZm9ybS9SZWZpbmFkby90cmFuc2Zvcm0nKTsKY29uc3Qge2xvYWR9ID0gcmVxdWlyZSgnLi9Mb2FkL1JlZmluYWRvL2xvYWQnKTsKCnRyeXsKICBjb25zdCBleHRyYWN0ZWQgPSBhd2FpdCBleHRyYWN0KCk7CiAgCiAgZm9yKGxldCBzaXRlQ29sbGVjdGlvbiBvZiBleHRyYWN0ZWQpewogICAgCiAgCWNvbnN0IHt0cmFuc2Zvcm1lZCwgYW5hbGlzZX0gPSBhd2FpdCB0cmFuc2Zvcm0oc2l0ZUNvbGxlY3Rpb24pOwogICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgbG9hZCh0cmFuc2Zvcm1lZCk7CiAgfQp9Y2F0Y2goZXJyKXt9&language=javascript)
--
+### NodeJS com [Puppeteer (Chromium headless)](https://github.com/puppeteer/puppeteer) 
+- Para coletar as informações foi criado um projeto de ETL ([Palavras.Background.ETL](https://github.com/eduardoworrel/Palavras-ETL-ElasticSearch/tree/main/src/Palavras.Background.ETL)) resumido nas imagens a seguir.
+![alt text](https://palavras.eduardoworrel.com/assets/schedule.refinado.js.png)
+![alt text](https://palavras.eduardoworrel.com/assets/extract.js.png)
+![alt text](https://palavras.eduardoworrel.com/assets/transform.js.png)
+![alt text](https://palavras.eduardoworrel.com/assets/load.js.png)
+### API com .NET6.0 e Elasticsearch
+- intermediar os processos de dados resumido nas imagens a seguir
+![alt text](https://palavras.eduardoworrel.com/assets/PageWordController.cs.png)
+![alt text](https://palavras.eduardoworrel.com/assets/PageWordController.cs_2.png)
+### SPA com ReactJS e [Dracula UI](https://ui.draculatheme.com/)
+- Apresentação dos dados
+![alt text](https://palavras.eduardoworrel.com/assets/ranking.jsx.png)

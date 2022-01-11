@@ -125,7 +125,7 @@ const Ranking = () => {
                                 {atualizacao ?
                                     <Paragraph >
 
-                                        <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.5em" }} >{atualizacao}</b> </Text>
+                                        <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao}</b> </Text>
                                     </Paragraph>
                                     : <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}
                             </Box>

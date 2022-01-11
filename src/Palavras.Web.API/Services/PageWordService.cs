@@ -89,7 +89,7 @@ namespace Services
                 new ClassesDePalavras
                 {
                     Classe = g.Key,
-                    Quantidade = g.Count()
+                    Quantidade = g.Sum(f => f.Quantidade)
                 })
             .OrderBy(e => e.Classe.Length)
             .ToList();

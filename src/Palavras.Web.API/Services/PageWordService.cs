@@ -51,7 +51,7 @@ namespace Services
                     foreach(var c in PageWordService.ProcessaClasses(words))
                     {
                         if(e.Classe != null) { 
-                            if (e.Classe != "?" && e.Classe.Contains(c))
+                            if (e.Classe != "?" && e.Classe.Contains(c.Classe))
                             {
                                 return false;
                             }

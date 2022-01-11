@@ -60,13 +60,13 @@ const Ranking = () => {
                                     {classe.classe == "?" ?
                                         <Box style={{ order: "1", margin: "auto" }} key={k} m="">
                                             <Button m="xxs" color="purple" disabled={true} >
-                                                DESCONHECIDO  <FontAwesomeIcon icon={faLock} /> - {classe.quantidade}
+                                                DESCONHECIDO  <FontAwesomeIcon icon={faLock} />  <span style={{ background: "#1D0E29", padding: "2px 9px", borderRadius: "15px", color: "white" }}>{classe.quantidade}</span>
                                             </Button>
                                         </Box>
                                         :
                                         <Box style={{ order: "2", margin: "auto" }} key={k} m="">
                                             <Button m="xxs" color="purple" variant="ghost">
-                                                {classe.classe} - {classe.quantidade}
+                                                {classe.classe} <span style={{ background: "#1D0E29", padding: "2px 9px", borderRadius: "15px", color: "white" }}>{classe.quantidade}</span>
                                             </Button>
                                         </Box>
                                     }
@@ -78,57 +78,63 @@ const Ranking = () => {
                     </>
                 </Box>
 
-                <Heading size="xl" style={{marginTop:"75px"}}>
+                <Heading size="xl" style={{ marginTop: "75px" }}>
                     <FontAwesomeIcon icon={faGlobeAmericas} /> TOP 10
                 </Heading>
                 <Divider color="pink" />
-                <Box style={{ display: "flex", flexFlow: "row wrap", }}>
-                    <Box style={{ flex: "1", }}>
-                        <Card
-                            variant="subtle" color="pink" m="xs" p="sm">
-                            {list.length ?
+                <Box style={{ display: "flex", flexFlow: "row wrap" }}>
+                    <Card style={{ flex: "1", minWidth: "240px" }}
+                        variant="subtle"
+                        color="pink" m="xs" p="sm">
+
+                        <div>
+                            <Heading p="sm" size="sm">
+                                <Text color="white">Ultima Atualização</Text>
+                            </Heading>
+
+                            <Box style={{ padding: "0 7%" }}>
+                                {atualizacao ?
+                                    <Paragraph >
+                                        <Text color="white"> <b style={{fontSize:"1.5em"}} >{atualizacao}</b> </Text>
+                                    </Paragraph>
+                                    : <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}
+                            </Box>
+                        </div>
+                    </Card>
+                    {list.length ?
+                        <>
+                            {list.map((i, c) =>
                                 <>
-
-                                    <Box style={{ padding: "0 5%" }}>
-                                        {list.map((i, c) =>
-                                            <Box key={c}>
-                                                <Text> {c + 1}º <b>{i.palavra}</b>
-                                    ({(
-                                                        (i.frequencia / list
-                                                            .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)
-                                                    }%)</Text>
-                                                <br />
+                                    <Box key={c} style={{ flex: "1", }} >
+                                        <Card style={{ minWidth: "240px" }} variant="subtle" color="pink" m="xs" p="sm">
+                                            <Box>
+                                                <Text>
+                                                    <div> {c + 1}º <b>{i.palavra}</b></div>
+                                                    <br />
+                                                    <div style={{ background: "#4C1A2D", padding: "6px 8px 7px 12px", borderRadius: "8px", color: "bisque" }}>
+                                                        <b>{((i.frequencia / list
+                                                            .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%</b> dos top 10
+                                                    </div>
+                                                    <div style={{ padding: "6px 8px 7px 12px", color: "bisque" }}>
+                                                        apareceu <b>{i.frequencia}</b> vezes
+                                                    </div>
+                                                </Text>
                                             </Box>
-
-                                        )}
+                                        </Card>
                                     </Box>
                                 </>
-                                :
-                                <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}
-                        </Card>
-                        <Card
-                            variant="subtle"
-                            color="pink" m="xs" p="sm">
+                            )}
+                        </>
+                        :
+                        <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>
+                    }
 
-                            <div>
-                                <Heading p="sm" size="sm">
-                                    <Text color="white"> <FontAwesomeIcon icon={faCube} /> Ultima Atualização</Text>
-                                </Heading>
 
-                                <Box style={{ padding: "0 7%" }}>
-                                    {atualizacao ?
-                                        <Paragraph>
-                                            <Text color="white"> <b>{atualizacao}</b> </Text>
-                                        </Paragraph>
-                                        : <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}
-                                </Box>
-                            </div>
-                        </Card>
-                    </Box>
+                </Box>
 
-                    <Card style={{ flex: "3",  }}
+                {/* <Card style={{ flex: "3", }}
                         variant="subtle" color="pink" m="xs" >
-                        <Box style={{width: "60%", margin:"10px auto"}}>
+                        <Box style={{ width: "60%", margin: "10px auto" }}>
 
                             {list.length ?
                                 <PolarAreaWithoutLegend list={list}></PolarAreaWithoutLegend>
@@ -136,20 +142,17 @@ const Ranking = () => {
                                 <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>
                             }
                         </Box>
-                    </Card>
+                    </Card> */}
 
 
 
-                </Box>
-
-                <Heading size="xl" style={{marginTop:"75px"}}>
+                <Heading size="xl" style={{ marginTop: "75px" }}>
                     <FontAwesomeIcon icon={faGlobeAmericas} /> TOP 10 CADA SITE
                     </Heading>
                 <Divider color="yellow" />
-                <Box  style={{ display: "flex", flexFlow: "row wrap"}}>
+                <Box style={{ display: "flex", flexFlow: "row wrap" }}>
                     {group.map((i, c) =>
-                        <Card m="xs" key={c} style={{flex:"2"}}
-                            variant="subtle" color="yellow" p="sm">
+                        <Box m="xs" key={c} style={{ flex: "2", minWidth: "31%" }}>
                             <div >
                                 <Heading p="sm" size="sm">
                                     <Text> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
@@ -157,16 +160,24 @@ const Ranking = () => {
                                 <Box style={{ padding: "0 5%" }}>
                                     {
                                         i.palavras.map((wordCount, count) =>
-                                            <div key={count} className="drac-text drac-text-white">
-                                                <Text> {count + 1}º <b>{wordCount.palavra}
-                                                </b> ({((wordCount.frequencia / i.palavras
-                                                    .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%)</Text>
-                                            </div>
+                                            <Card key={count} variant="subtle" color="yellow" p="sm" m="sm">
+                                                <Text>
+                                                    {count + 1}º <b>{wordCount.palavra}<br /></b>
+                                                </Text>
+                                                <div style={{ padding: "6px 0px 0px 0px", color: "bisque" }}>
+                                                    <b>{((wordCount.frequencia / i.palavras
+                                                        .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%</b> dos top 10
+                                                    </div>
+                                                <div style={{padding: "6px 0px 0px 0px", color: "bisque" }}>
+                                                    apareceu <b>{wordCount.frequencia}</b> vezes
+                                                </div>
+                                            </Card>
+
                                         )
                                     }
                                 </Box>
                             </div>
-                        </Card>
+                        </Box>
                     )}
 
                 </Box>

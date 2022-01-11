@@ -4,7 +4,7 @@
 
 - Disponível em [palavras.eduardoworrel.com](https://palavras.eduardoworrel.com)
 
-# Como funciona
+# Fluxo de trabalho
 ### NodeJS com [Puppeteer (Chromium headless)](https://github.com/puppeteer/puppeteer) 
 - Para coletar as informações foi criado um projeto de ETL ([Palavras.Background.ETL](https://github.com/eduardoworrel/Palavras-ETL-ElasticSearch/tree/main/src/Palavras.Background.ETL)) resumido nas imagens a seguir.
 ![alt text](https://palavras.eduardoworrel.com/assets/schedule.refinado.js.png)

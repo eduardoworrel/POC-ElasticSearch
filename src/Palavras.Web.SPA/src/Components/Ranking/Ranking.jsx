@@ -152,7 +152,7 @@ const Ranking = () => {
                 <Divider color="yellow" />
                 <Box style={{ display: "flex", flexFlow: "row wrap" }}>
                     {group.map((i, c) =>
-                        <Box m="xs" key={c} style={{ flex: "2", minWidth: "31%" }}>
+                        <Box key={c} style={{ flex: "2", minWidth: "240px" }}>
                             <div >
                                 <Heading p="sm" size="sm">
                                     <Text> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>

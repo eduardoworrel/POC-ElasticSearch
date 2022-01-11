@@ -157,7 +157,7 @@ const Ranking = () => {
                                 <Heading p="sm" size="sm">
                                     <Text> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
                                 </Heading>
-                                <Box style={{ padding: "0 5%" }}>
+                                <Box style={{ padding: "0 0%" }}>
                                     {
                                         i.palavras.map((wordCount, count) =>
                                             <Card key={count} variant="subtle" color="yellow" p="sm" m="sm">

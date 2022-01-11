@@ -57,16 +57,16 @@ const Ranking = () => {
                         {classes.length > 0 ?
                             classes.map((classe, k) =>
                                 <>
-                                    {classe == "?" ?
+                                    {classe.classe == "?" ?
                                         <Box style={{ order: "1", margin: "auto" }} key={k} m="">
                                             <Button m="xxs" color="purple" disabled={true} >
-                                                DESCONHECIDO  <FontAwesomeIcon icon={faLock} />
+                                                DESCONHECIDO  <FontAwesomeIcon icon={faLock} /> - {classe.quantidade}
                                             </Button>
                                         </Box>
                                         :
                                         <Box style={{ order: "2", margin: "auto" }} key={k} m="">
                                             <Button m="xxs" color="purple" variant="ghost">
-                                                {classe}
+                                                {classe.classe} - {classe.quantidade}
                                             </Button>
                                         </Box>
                                     }

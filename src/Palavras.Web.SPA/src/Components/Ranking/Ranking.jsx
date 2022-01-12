@@ -1,4 +1,4 @@
-import { Heading, Box, Button, Card, Text, Paragraph, Divider } from "@dracula/dracula-ui";
+import { Heading, Box, Button, Card, Text, Paragraph, Divider, List, Anchor } from "@dracula/dracula-ui";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobeAmericas, faCube, faFilter, faLock, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
@@ -68,21 +68,21 @@ const Ranking = () => {
                             <>
                                 {classes.length > 0 ?
                                     classes.map((classe, k) =>
-                                        <>
+                                        <Box key={k}>
                                             {classe.classe == "?" ?
-                                                <Box style={{ order: "1", margin: "auto" }} key={k} m="">
+                                                <Box style={{ order: "1", margin: "auto" }} m="">
                                                     <Button style={{
-                                                        fontSize: ".7em",
+                                                        fontSize: ".8em",
                                                         padding: "0 5px",
                                                         margin: "3px"
                                                     }} m="xxs" color="purple" disabled={true} >
-                                                        DESCONHECIDO  <FontAwesomeIcon icon={faLock} />  <span style={{ fontSize: ".6em", background: "#1D0E29", padding: "2px 9px", borderRadius: "5px", color: "white" }}>{classe.quantidade}</span>
+                                                        Desconhecido * <FontAwesomeIcon icon={faLock} />  <span style={{ fontSize: ".6em", background: "#1D0E29", padding: "2px 9px", borderRadius: "5px", color: "white" }}>{classe.quantidade}</span>
                                                     </Button>
                                                 </Box>
                                                 :
-                                                <Box style={{ order: "2", margin: "auto", }} key={k} m="">
+                                                <Box style={{ order: "2", margin: "auto", }} m="">
                                                     <Button style={{
-                                                        fontSize: ".7em",
+                                                        fontSize: ".8em",
                                                         padding: "0 5px",
                                                         margin: "3px"
                                                     }} color="purple" variant="ghost">
@@ -93,7 +93,8 @@ const Ranking = () => {
                                                     </Button>
                                                 </Box>
                                             }
-                                        </>
+
+                                        </Box>
                                     )
                                     :
                                     <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>
@@ -116,7 +117,7 @@ const Ranking = () => {
                 </Heading>
                 <Divider color="pink" />
                 {topIsVisible ?
-                    <Box style={{ display: "flex", flexFlow: "row wrap" }}>
+                    <Box key={0} style={{ display: "flex", flexFlow: "row wrap" }}>
                         <Card style={{ flex: "1", minWidth: "240px" }}
                             variant="subtle"
                             color="pink" m="xs" p="sm">
@@ -134,25 +135,25 @@ const Ranking = () => {
                         {list.length ?
                             <>
                                 {list.map((i, c) =>
-                                    <>
-                                        <Box key={c} style={{ flex: "1", }} >
-                                            <Card style={{ minWidth: "240px" }} variant="subtle" color="pink" m="xs" p="sm">
-                                                <Box>
-                                                    <Text>
-                                                        <div> {c + 1}º <b>{i.palavra}</b></div>
-                                                        <br />
-                                                        <div style={{ background: "#4C1A2D", padding: "6px 8px 7px 12px", borderRadius: "8px", color: "white" }}>
-                                                            <b>{((i.frequencia / list
-                                                                .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%</b> dos top 10
+
+                                    <Box key={c} style={{ flex: "1", }} >
+                                        <Card style={{ minWidth: "240px" }} variant="subtle" color="pink" m="xs" p="sm">
+                                            <Box>
+                                                <Text>
+                                                    <div> {c + 1}º <b style={{ fontSize: "1.3em" }}>{i.palavra}</b></div>
+                                                    <br />
+                                                    <div style={{ background: "", padding: "6px 8px 7px 12px", borderRadius: "8px", color: "#cc4b7a" }}>
+                                                        <b>{((i.frequencia / list
+                                                            .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%</b> dos top 10
                                                 </div>
-                                                        <div style={{ padding: "6px 8px 7px 12px", color: "white" }}>
-                                                            apareceu <b>{i.frequencia}</b> vezes
+                                                    <div style={{ padding: "6px 8px 7px 12px", color: "rgb(255, 144, 184)" }}>
+                                                        apareceu <b>{i.frequencia}</b> vezes
                                                 </div>
-                                                    </Text>
-                                                </Box>
-                                            </Card>
-                                        </Box>
-                                    </>
+                                                </Text>
+                                            </Box>
+                                        </Card>
+                                    </Box>
+
                                 )}
                             </>
                             :
@@ -191,43 +192,56 @@ const Ranking = () => {
                     </span>
                 </Heading>
                 <Divider color="yellow" />
-                {groupIsVisible ?
-                <Box style={{ display: "flex", flexFlow: "row wrap" }}>
-                {group.map((i, c) =>
-                    <Box key={c} style={{ flex: "2", minWidth: "240px" }}>
-                        <div >
-                            <Heading p="sm" size="sm">
-                                <Text> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
-                            </Heading>
-                            <Box style={{ padding: "0 0%" }}>
-                                {
-                                    i.palavras.map((wordCount, count) =>
-                                        <Card key={count} variant="subtle" color="yellow" p="sm" m="sm">
-                                            <Text>
-                                                {count + 1}º <b>{wordCount.palavra}<br /></b>
-                                            </Text>
-                                            <div style={{ padding: "6px 0px 0px 0px", color: "bisque" }}>
-                                                <b>{((wordCount.frequencia / i.palavras
-                                                    .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%</b> dos top 10
+                <Box style={{ paddingBottom: "100px" }}>
+                    {groupIsVisible ?
+                        <Box style={{ display: "flex", flexFlow: "row wrap" }}>
+                            {group.map((i, c) =>
+                                <Box key={c} style={{ flex: "2", minWidth: "240px" }}>
+                                    <div >
+                                        <Heading p="sm" size="sm">
+                                            <Text> <FontAwesomeIcon icon={faCube} /> {i.site} </Text>
+                                        </Heading>
+                                        <Box style={{ padding: "0 0%" }}>
+                                            {
+                                                i.palavras.map((wordCount, count) =>
+                                                    <Card key={count} variant="subtle" color="yellow" p="sm" m="sm">
+                                                        <Text>
+                                                            {count + 1}º <b>{wordCount.palavra}<br /></b>
+                                                        </Text>
+                                                        <div style={{ padding: "6px 0px 0px 0px", color: "bisque" }}>
+                                                            <b>{((wordCount.frequencia / i.palavras
+                                                                .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%</b> dos top 10
                                                 </div>
-                                            <div style={{ padding: "6px 0px 0px 0px", color: "bisque" }}>
-                                                apareceu <b>{wordCount.frequencia}</b> vezes
+                                                        <div style={{ padding: "6px 0px 0px 0px", color: "bisque" }}>
+                                                            apareceu <b>{wordCount.frequencia}</b> vezes
                                             </div>
-                                        </Card>
+                                                    </Card>
 
-                                    )
-                                }
-                            </Box>
-                        </div>
-                    </Box>
-                )}
+                                                )
+                                            }
+                                        </Box>
+                                    </div>
+                                </Box>
+                            )}
 
-            </Box>
-                :
-                <></>}
-                
-
-
+                        </Box>
+                        :
+                        <></>}
+                </Box>
+                <Box style={{ bottom: "10px" }}>
+                    <Divider />
+                    <List variant="none" color="purple">
+                        <li className="drac-text drac-text-white">
+                            Desenvolvido por <Anchor href="https://eduardoworrel.com" color="cyanGreen" hoverColor="yellowPink" mb="sm">
+                                Eduardo Worrel
+                    </Anchor>
+                        </li>
+                        <li className="drac-text drac-text-white">Disponível em <Anchor href="https://github.com/eduardoworrel/Palavras-ETL-ElasticSearch" color="cyanGreen" hoverColor="yellowPink" mb="sm">
+                            Github
+                    </Anchor>
+                        </li>
+                    </List>
+                </Box>
             </Box >
         </>
     )

@@ -141,11 +141,64 @@ const terra = async (page) => {
         data: pageText
     }
 }
+
+const estadao = async (page) => {
+    await page.goto("https://www.estadao.com.br");
+    const pageText = await page.evaluate(() => {
+        const _document = document;
+            [
+                ".n-hdr",
+                "#barra-estadao-parceiros",
+                "#banner-premium",
+                "footer",
+                "script",
+                "style"
+              
+            ].forEach((selector) => {
+                for(let e of _document.querySelectorAll(selector)){
+                    e.remove();
+                }
+            });
+
+        return _document.querySelector("body").innerText;
+    });
+
+    return {
+        key: 'estadao.com.br',
+        data: pageText
+    }
+}
+
+const veja = async (page) => {
+    await page.goto("https://veja.abril.com.br");
+    const pageText = await page.evaluate(() => {
+        const _document = document;
+            [
+                "header",
+                "footer",
+                "script",
+                "style"
+              
+            ].forEach((selector) => {
+                for(let e of _document.querySelectorAll(selector)){
+                    e.remove();
+                }
+            });
+
+        return _document.querySelector("body").innerText;
+    });
+
+    return {
+        key: 'veja.abril.com.br',
+        data: pageText
+    }
+}
 module.exports = {
-    //g1,
     uol,
     cnnbrasil,
     google,
-    jovempan,
-    terra
+    estadao,
+    veja,
+    terra,
+    jovempan
 }

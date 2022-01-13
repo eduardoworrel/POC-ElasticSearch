@@ -193,6 +193,33 @@ const veja = async (page) => {
         data: pageText
     }
 }
+
+const istoe = async (page) => {
+    await page.goto("https://istoe.com.br");
+    const pageText = await page.evaluate(() => {
+        const _document = document;
+            [
+                ".menu-revistas",
+                ".cabecalho",
+                ".ad-bar-header",
+                "iframe",
+                "script",
+                "style"
+              
+            ].forEach((selector) => {
+                for(let e of _document.querySelectorAll(selector)){
+                    e.remove();
+                }
+            });
+
+        return _document.querySelector("body").innerText;
+    });
+
+    return {
+        key: 'istoe.com.br',
+        data: pageText
+    }
+}
 module.exports = {
     uol,
     cnnbrasil,
@@ -200,5 +227,6 @@ module.exports = {
     estadao,
     veja,
     terra,
-    jovempan
+    jovempan,
+    istoe
 }

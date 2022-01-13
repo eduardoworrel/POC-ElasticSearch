@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobeAmericas, faCube, faFilter, faLock, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Puff } from 'react-loading-icons'
 import { PolarAreaWithoutLegend } from "../Chart/PolarAreaWithoutLegend";
+import { Horizontal } from "../Chart/Horizontal";
 
 import env from "react-dotenv";
 
@@ -40,36 +41,36 @@ const Ranking = () => {
 
     return (
         <>
-         <Box>
-                    <Heading size="xl" style={{
-                        textAlign: "center",
-                        marginTop: "50px",
-                        marginBottom: "50px"
-                    }}>Palavras mais citadas nos sites de notícia</Heading>
-                </Box>
-                <Box style={{ margin: "0 auto", width: "95%" }}>
+            <Box>
+                <Heading size="xl" style={{
+                    textAlign: "center",
+                    marginTop: "50px",
+                    marginBottom: "50px"
+                }}>Palavras mais citadas nos sites de notícia</Heading>
+            </Box>
+            <Box style={{ margin: "0 auto", width: "95%" }}>
 
-                    {atualizacao.quantidadePalavras ?
-                        <section style={{borderRadius:"15px",background: "rgb(17, 17, 17)",marginBottom: "50px",textAlign:"center", display:"flex", flexFlow:"row wrap", padding: "0 7% 30px", justifyContent:"space-around"}}>
-                            <Box style={{marginTop:"20px"}}>
-                                <Text color="white"> <b style={{ fontSize: "1.8em" }} >{atualizacao.quantidadePalavras.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</b> <br/>Palavras registradas </Text>
-                            </Box>
-                            <Box style={{marginTop:"20px"}}>
-                                <Text color="white"><b style={{ fontSize: "1.8em" }} >{atualizacao.quantidadeClasses}</b> <br/>Classes gramaticais </Text>
-                            </Box>
-                            <Box style={{marginTop:"20px"}}>
-                                <Text color="white"> Ultima Atualização <br/><b style={{ fontSize: "1.2em" }} >{atualizacao.ultimaAtualizacao}</b> </Text>
-                            </Box>
-                            <Box style={{marginTop:"20px"}}>
-                                <Text color="white"> Primeira coleta: <br/><b style={{ fontSize: "1.2em" }} >{atualizacao.dataInicio}</b> </Text>
-                            </Box>
-                        </section>
-                        : <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}
+                {atualizacao.quantidadePalavras ?
+                    <section style={{ borderRadius: "15px", background: "rgb(17, 17, 17)", marginBottom: "50px", textAlign: "center", display: "flex", flexFlow: "row wrap", padding: "0 7% 30px", justifyContent: "space-around" }}>
+                        <Box style={{ marginTop: "20px" }}>
+                            <Text color="white"> <b style={{ fontSize: "1.8em" }} >{atualizacao.quantidadePalavras.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</b> <br />Palavras registradas </Text>
+                        </Box>
+                        <Box style={{ marginTop: "20px" }}>
+                            <Text color="white"><b style={{ fontSize: "1.8em" }} >{atualizacao.quantidadeClasses}</b> <br />Classes gramaticais </Text>
+                        </Box>
+                        <Box style={{ marginTop: "20px" }}>
+                            <Text color="white"> Ultima Atualização <br /><b style={{ fontSize: "1.2em" }} >{atualizacao.ultimaAtualizacao}</b> </Text>
+                        </Box>
+                        <Box style={{ marginTop: "20px" }}>
+                            <Text color="white"> Primeira coleta: <br /><b style={{ fontSize: "1.2em" }} >{atualizacao.dataInicio}</b> </Text>
+                        </Box>
+                    </section>
+                    : <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}
 
-                </Box>
+            </Box>
             <Box style={{ width: "95%", margin: "0 auto" }}>
 
-               
+
 
                 <Heading size="md" onClick={() => { setFilterIsVisible(!filterIsVisible) }}>
                     <FontAwesomeIcon icon={faFilter} /> CLASSES GRAMATICAIS
@@ -84,7 +85,7 @@ const Ranking = () => {
                 <Divider color="purple" />
                 {
                     filterIsVisible ?
-                        <Box style={{ display: "flex", flexFlow: "row wrap", width: "95%", margin: "0 auto" }}>
+                        <Box style={{ display: "flex", flexFlow: "row wrap", width: "95%", margin: "0 auto", justifyContent: "space-between" }}>
                             <>
                                 {classes.length > 0 ?
                                     classes.map((classe, k) =>
@@ -137,8 +138,20 @@ const Ranking = () => {
                 </Heading>
                 <Divider color="pink" />
                 {topIsVisible ?
-                    <Box style={{ display: "flex", flexFlow: "row wrap" }}>
+                    <Box style={{ width: "100%", display: "flex", flexFlow: "row wrap" }}>
+                        <Card style={{ flex: "3",  }}
+                            variant="subtle" color="pink" m="xs" >
+                            <Box style={{ width: "95%", height: "400px", margin: "10px auto" }}>
 
+                                {list.length ?
+                                    <>
+                                        <Horizontal list={list}></Horizontal>
+                                    </>
+                                    :
+                                    <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>
+                                }
+                            </Box>
+                        </Card>
                         {list.length ?
                             <>
                                 {list.map((i, c) =>
@@ -168,24 +181,10 @@ const Ranking = () => {
                         }
 
 
+
                     </Box>
                     :
                     <></>}
-
-
-                {/* <Card style={{ flex: "3", }}
-                        variant="subtle" color="pink" m="xs" >
-                        <Box style={{ width: "60%", margin: "10px auto" }}>
-
-                            {list.length ?
-                                <PolarAreaWithoutLegend list={list}></PolarAreaWithoutLegend>
-                                :
-                                <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>
-                            }
-                        </Box>
-                    </Card> */}
-
-
 
                 <Heading size="md" style={{ marginTop: "75px" }}
                     onClick={() => { setGroupIsVisible(!groupIsVisible) }}>

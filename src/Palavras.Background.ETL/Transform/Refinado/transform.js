@@ -55,7 +55,7 @@ module.exports = {
             try {
                 const {
                     data
-                } = getObjectFrom(wordArray[0]);
+                } = await getObjectFrom(wordArray[0]);
                 if (data[0].class) {
                     let newWord = {
                         site: keyValue.key,
@@ -80,14 +80,12 @@ module.exports = {
                     newWord.class = 'numeral'
                 }
 
-
-
                 if (lastCharIsS(wordArray[0])) {
-                    const tryWordWithoutS = wordArray[0].slice(0, -1);
                     try {
+                        const tryWordWithoutS = wordArray[0].slice(0, -1);
                         const {
                             data
-                        } = getObjectFrom(tryWordWithoutS)
+                        } = await getObjectFrom(tryWordWithoutS)
                         if (data[0].class) {
                             newWord = {
                                 site: keyValue.key,
@@ -103,7 +101,7 @@ module.exports = {
                                 const tryWordWithER = wordArray[0] + "ER";
                                 const {
                                     data
-                                } = getObjectFrom(tryWordWithER)
+                                } = await getObjectFrom(tryWordWithER)
                                 if (data[0].class) {
                                     newWord = {
                                         site: keyValue.key,

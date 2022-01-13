@@ -40,16 +40,36 @@ const Ranking = () => {
 
     return (
         <>
-            <Box style={{ width: "95%", margin: "0 auto" }}>
-
-                <Box>
+         <Box>
                     <Heading size="xl" style={{
                         textAlign: "center",
                         marginTop: "50px",
                         marginBottom: "50px"
                     }}>Palavras mais citadas nos sites de notícia</Heading>
                 </Box>
+                <Box style={{ margin: "0 auto", width: "95%" }}>
 
+                    {atualizacao.quantidadePalavras ?
+                        <section style={{borderRadius:"15px",background: "rgb(17, 17, 17)",marginBottom: "50px",textAlign:"center", display:"flex", flexFlow:"row wrap", padding: "0 7% 30px", justifyContent:"space-around"}}>
+                            <Box style={{marginTop:"20px"}}>
+                                <Text color="white"> <b style={{ fontSize: "1.8em" }} >{atualizacao.quantidadePalavras.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</b> <br/>Palavras registradas </Text>
+                            </Box>
+                            <Box style={{marginTop:"20px"}}>
+                                <Text color="white"><b style={{ fontSize: "1.8em" }} >{atualizacao.quantidadeClasses}</b> <br/>Classes gramaticais </Text>
+                            </Box>
+                            <Box style={{marginTop:"20px"}}>
+                                <Text color="white"> Ultima Atualização <br/><b style={{ fontSize: "1.2em" }} >{atualizacao.ultimaAtualizacao}</b> </Text>
+                            </Box>
+                            <Box style={{marginTop:"20px"}}>
+                                <Text color="white"> Primeira coleta: <br/><b style={{ fontSize: "1.2em" }} >{atualizacao.dataInicio}</b> </Text>
+                            </Box>
+                        </section>
+                        : <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}
+
+                </Box>
+            <Box style={{ width: "95%", margin: "0 auto" }}>
+
+               
 
                 <Heading size="md" onClick={() => { setFilterIsVisible(!filterIsVisible) }}>
                     <FontAwesomeIcon icon={faFilter} /> CLASSES GRAMATICAIS
@@ -117,31 +137,8 @@ const Ranking = () => {
                 </Heading>
                 <Divider color="pink" />
                 {topIsVisible ?
-                    <Box key={0} style={{ display: "flex", flexFlow: "row wrap" }}>
-                        <Card style={{ flex: "1", minWidth: "240px" }}
-                            variant="subtle"
-                            color="pink" m="xs" p="sm">
+                    <Box style={{ display: "flex", flexFlow: "row wrap" }}>
 
-                            <Box style={{ padding: "0 7%" }}>
-                                {atualizacao.length > 0 ?
-                                    <section>
-                                        <Paragraph >
-                                            <Text color="white"> <b style={{ fontSize: "1.2em" }} >{atualizacao.quantidadePalavras}</b> </Text>
-                                        </Paragraph>
-                                        <Paragraph >
-                                            <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao.quantidadeClasses}</b> </Text>
-                                        </Paragraph>
-                                        <Paragraph >
-                                            <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao.ultimaAtualizacao}</b> </Text>
-                                        </Paragraph>
-                                        <Paragraph >
-                                            <Text color="white"> Primeira coleta: <b style={{ fontSize: "1.2em" }} >{atualizacao.dataInicio}</b> </Text>
-                                        </Paragraph>
-                                    </section>
-                                    : <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}
-                            </Box>
-
-                        </Card>
                         {list.length ?
                             <>
                                 {list.map((i, c) =>

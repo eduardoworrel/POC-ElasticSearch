@@ -126,16 +126,16 @@ const Ranking = () => {
                                 {atualizacao.length > 0 ?
                                     <section>
                                         <Paragraph >
-                                            <Text color="white"> <b style={{ fontSize: "1.2em" }} >{atualizacao.QuantidadePalavras}</b> </Text>
+                                            <Text color="white"> <b style={{ fontSize: "1.2em" }} >{atualizacao.quantidadePalavras}</b> </Text>
                                         </Paragraph>
                                         <Paragraph >
-                                            <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao.QuantidadeClasses}</b> </Text>
+                                            <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao.quantidadeClasses}</b> </Text>
                                         </Paragraph>
                                         <Paragraph >
-                                            <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao.UltimaAtualizacao}</b> </Text>
+                                            <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao.ultimaAtualizacao}</b> </Text>
                                         </Paragraph>
                                         <Paragraph >
-                                            <Text color="white"> Primeira coleta: <b style={{ fontSize: "1.2em" }} >{atualizacao.DataInicio}</b> </Text>
+                                            <Text color="white"> Primeira coleta: <b style={{ fontSize: "1.2em" }} >{atualizacao.dataInicio}</b> </Text>
                                         </Paragraph>
                                     </section>
                                     : <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}

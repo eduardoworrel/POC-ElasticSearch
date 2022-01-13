@@ -15,6 +15,13 @@ function groupBy(list, keyGetter) {
     });
     return map;
 }
+async function getObjectFrom(string) {
+    const urlRequest = url + string;
+    return {
+        data
+    } = await axios.get(encodeURI(urlRequest));
+
+}
 
 function lastCharIsS(string) {
     return string[string.length - 1] == 'S'
@@ -45,13 +52,10 @@ module.exports = {
         const group = groupBy(splitData, (item) => item);
 
         for (let wordArray of group) {
-            const urlRequest = url + wordArray[0];
-
             try {
                 const {
                     data
-                } = await axios.get(encodeURI(urlRequest));
-
+                } = getObjectFrom(wordArray[0]);
                 if (data[0].class) {
                     let newWord = {
                         site: keyValue.key,
@@ -71,14 +75,19 @@ module.exports = {
                     class: '?',
                     count: wordArray[1].length,
                 }
+
+                if (!isNaN(parseInt(wordArray[0]))) {
+                    newWord.class = 'numeral'
+                }
+
+
+
                 if (lastCharIsS(wordArray[0])) {
                     const tryWordWithoutS = wordArray[0].slice(0, -1);
-                    const urlRequest = url + tryWordWithoutS;
-
                     try {
                         const {
                             data
-                        } = await axios.get(encodeURI(urlRequest));
+                        } = getObjectFrom(tryWordWithoutS)
                         if (data[0].class) {
                             newWord = {
                                 site: keyValue.key,
@@ -89,8 +98,25 @@ module.exports = {
                             WordList.push(newWord);
                         }
                     } catch (e) {
-
-                        analise.semClasse += 1;
+                        try {
+                            if (lastCharIsZ(wordArray[0])) {
+                                const tryWordWithER = wordArray[0] + "ER";
+                                const {
+                                    data
+                                } = getObjectFrom(tryWordWithER)
+                                if (data[0].class) {
+                                    newWord = {
+                                        site: keyValue.key,
+                                        word: tryWordWithER,
+                                        class: data[0].class,
+                                        count: wordArray[1].length,
+                                    }
+                                    WordList.push(newWord);
+                                }
+                            }
+                        } catch (e) {
+                            analise.semClasse += 1;
+                        }
                     }
                 }
 

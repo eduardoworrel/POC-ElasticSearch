@@ -16,6 +16,9 @@ function groupBy(list, keyGetter) {
     return map;
 }
 
+function lastCharIsS(string) {
+    return string[string.length - 1] == 'S'
+}
 module.exports = {
     transform: async (keyValue) => {
         WordList = [];
@@ -31,6 +34,7 @@ module.exports = {
             .replace(/:/g, ' ')
             .replace(/,/g, ' ')
             .replace(/'/g, ' ')
+            .replace(/-/g, ' ')
             .replace(/"/g, ' ')
             .split(whiteSpace);
 
@@ -61,18 +65,42 @@ module.exports = {
                     throw new Error('sem class');
                 }
             } catch (e) {
-
                 let newWord = {
                     site: keyValue.key,
                     word: wordArray[0],
                     class: '?',
                     count: wordArray[1].length,
                 }
+                if (lastCharIsS(wordArray[0])) {
+                    const tryWordWithoutS = wordArray[0].slice(0, -1);
+                    const urlRequest = url + tryWordWithoutS;
+
+                    try {
+                        const {
+                            data
+                        } = await axios.get(encodeURI(urlRequest));
+                        if (data[0].class) {
+                            newWord = {
+                                site: keyValue.key,
+                                word: tryWordWithoutS,
+                                class: data[0].class,
+                                count: wordArray[1].length,
+                            }
+                            WordList.push(newWord);
+                        }
+                    } catch (e) {
+
+                        analise.semClasse += 1;
+                    }
+                }
+
                 WordList.push(newWord);
                 analise.palavras += 1;
-                analise.semClasse += 1;
             }
         }
-        return {transformed: WordList, analise};
+        return {
+            transformed: WordList,
+            analise
+        };
     }
 }

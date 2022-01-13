@@ -65,21 +65,36 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("GetUltimaAtualizacao")]
-        public string GetUltimaAtualizacao()
+        public Atualizacao GetUltimaAtualizacao()
         {
 
-            var searchResponse = client.Search<PalavraRefinada>(s => s
+            var first = client.Search<PalavraRefinada>(s => s
+                .From(0)
+                .Take(1)
+                .Sort(sort =>
+                    sort.Ascending(f => f.Datahora)
+                    )
+            ).Documents.First();
+
+            var last = client.Search<PalavraRefinada>(s => s
                 .From(0)
                 .Take(1)
                 .Sort(sort =>
                     sort.Descending(f => f.Datahora)
                     )
-            );
+            ).Documents.First();
 
-            var page = searchResponse.Documents.First();
+            var pages = ElasticService.GetAllDocumentsInIndex<PalavraRefinada>(client, "refinado");
+             
 
-            return page.Datahora.ToString("dd/MM/yyyy HH:mm");
-
+            return new Atualizacao
+            {
+                QuantidadeClasses = PageWordService.ProcessaClasses((List<PalavraRefinada>)pages).Count,
+                QuantidadePalavras = pages.Count(),
+            DataInicio = first.Datahora.ToString("dd/MM/yyyy HH:mm"),
+                UltimaAtualizacao = last.Datahora.ToString("dd/MM/yyyy HH:mm")
+            };
+            
         }
 
         [HttpGet]
@@ -87,17 +102,8 @@ namespace Api.Controllers
         public List<ClassesDePalavras> GetClasses()
         {
 
-            List<ClassesDePalavras> result = new();
-
-            var searchResponse = client.Search<PalavraRefinada>(s => s
-                .From(0)
-                .Size(90000)
-                      );
-
-            var pages = (List<PalavraRefinada>)searchResponse.Documents;
-
-            result = PageWordService.ProcessaClasses(pages);
-            return result;
+            var pages = ElasticService.GetAllDocumentsInIndex<PalavraRefinada>(client, "refinado");
+            return PageWordService.ProcessaClasses((List<PalavraRefinada>) pages);
 
         }
 
@@ -106,20 +112,9 @@ namespace Api.Controllers
         public List<GrupoPalavraFinal> GetGroups()
         {
 
-            List<GrupoPalavraFinal> result = new();
+            var pages = ElasticService.GetAllDocumentsInIndex<PalavraRefinada>(client, "refinado");
+            return PageWordService.ProcessaRankAgrupado((List<PalavraRefinada>) pages);
             
-            var searchResponse = client.Search<PalavraRefinada>(s => s
-                .From(0)
-                .Size(90000)
-            );
-
-            var pages = (List<PalavraRefinada>)searchResponse.Documents;
-
-            result = PageWordService.ProcessaRankAgrupado(pages);
-
-
-            return result;
-
         }
 
         [HttpGet]
@@ -127,49 +122,8 @@ namespace Api.Controllers
         public List<PalavraFinal> GetRank()
         {
 
-
-            List<PalavraFinal> result = new();
-         
-            var searchResponse = client.Search<PalavraRefinada>(s => s
-                .From(0)
-                .Size(90000)
-                      );
-
-            var pages = (List<PalavraRefinada>)searchResponse.Documents;
-
-            result = PageWordService.ProcessaRank(pages, 10);
-
-
-            return result;
-
-        }
-
-        [HttpGet]
-        [Route("GetRankThisMonth")]
-        public List<PalavraFinal> GetRankThisMonth()
-        {
-            List<PalavraFinal> result = new();
-
-            int lastDay = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
-            int firstDay = 01;
-
-            var searchResponse = client.Search<PalavraRefinada>(s => s
-            .Query(q => q
-            .DateRange(r => r
-                .Field(f => f.Datahora)
-                .GreaterThanOrEquals(new DateTime(DateTime.Now.Year, DateTime.Now.Month, firstDay))
-                .LessThan(new DateTime(DateTime.Now.Year, DateTime.Now.Month, lastDay))
-            ))
-            .From(0)
-            .Size(90000)
-            );
-
-            var pages = (List<PalavraRefinada>)searchResponse.Documents;
-
-            result = PageWordService.ProcessaRank(pages, 10);
-
-            return result;
-
+            var pages = ElasticService.GetAllDocumentsInIndex<PalavraRefinada>(client, "refinado");          
+            return PageWordService.ProcessaRank((List<PalavraRefinada>) pages, 10);
 
         }
 

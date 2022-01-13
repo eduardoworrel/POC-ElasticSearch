@@ -15,7 +15,7 @@ const UrlClasses = env.API + "/PageWord/GetClasses"
 const Ranking = () => {
     const [list, setList] = useState([]);
     const [group, setGroup] = useState([]);
-    const [atualizacao, setAtualizacao] = useState("");
+    const [atualizacao, setAtualizacao] = useState({});
     const [classes, setClasses] = useState([]);
 
     const [filterIsVisible, setFilterIsVisible] = useState(false);
@@ -29,7 +29,7 @@ const Ranking = () => {
         fetch(UrlGroup).then(a => a.json()).then((a) => {
             setGroup(a)
         });
-        fetch(UrlUltimaAtualizacao).then(a => a.text()).then((a) => {
+        fetch(UrlUltimaAtualizacao).then(a => a.json()).then((a) => {
             setAtualizacao(a)
         });
         fetch(UrlClasses).then(a => a.json()).then((a) => {
@@ -123,11 +123,21 @@ const Ranking = () => {
                             color="pink" m="xs" p="sm">
 
                             <Box style={{ padding: "0 7%" }}>
-                                {atualizacao ?
-                                    <Paragraph >
-
-                                        <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao}</b> </Text>
-                                    </Paragraph>
+                                {atualizacao.length > 0 ?
+                                    <section>
+                                        <Paragraph >
+                                            <Text color="white"> <b style={{ fontSize: "1.2em" }} >{atualizacao.QuantidadePalavras}</b> </Text>
+                                        </Paragraph>
+                                        <Paragraph >
+                                            <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao.QuantidadeClasses}</b> </Text>
+                                        </Paragraph>
+                                        <Paragraph >
+                                            <Text color="white"> Ultima Atualização <b style={{ fontSize: "1.2em" }} >{atualizacao.UltimaAtualizacao}</b> </Text>
+                                        </Paragraph>
+                                        <Paragraph >
+                                            <Text color="white"> Primeira coleta: <b style={{ fontSize: "1.2em" }} >{atualizacao.DataInicio}</b> </Text>
+                                        </Paragraph>
+                                    </section>
                                     : <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>}
                             </Box>
 

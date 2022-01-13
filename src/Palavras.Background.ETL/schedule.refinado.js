@@ -8,8 +8,14 @@ async function start(){
     const FirstTimeToCount = new Date();
     let timeToCount = FirstTimeToCount;
     const duration = () => {
+        
        const diferenceInSeconds = Math.round(((new Date() - timeToCount)/ 1000))
+       
        timeToCount = new Date();
+       
+       if(diferenceInSeconds > 60){
+           return diferenceInSeconds / 60 + "m"
+       }
        return diferenceInSeconds + "s";
     }
 

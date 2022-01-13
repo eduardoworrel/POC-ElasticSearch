@@ -26,6 +26,10 @@ async function getObjectFrom(string) {
 function lastCharIsS(string) {
     return string[string.length - 1] == 'S'
 }
+
+function lastCharIsS(string) {
+    return string[string.length - 1] == 'Z'
+}
 module.exports = {
     transform: async (keyValue) => {
         WordList = [];

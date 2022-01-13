@@ -139,21 +139,19 @@ const Ranking = () => {
                 <Divider color="pink" />
                 {topIsVisible ?
                     <Box style={{ width: "100%", display: "flex", flexFlow: "row wrap" }}>
-                        <Card style={{ flex: "3",  }}
-                            variant="subtle" color="pink" m="xs" >
-                            <Box style={{ width: "95%", height: "400px", margin: "10px auto" }}>
 
-                                {list.length ?
-                                    <>
-                                        <Horizontal list={list}></Horizontal>
-                                    </>
-                                    :
-                                    <><Puff stroke="pink" strokeOpacity={.925} speed={.75} /></>
-                                }
-                            </Box>
-                        </Card>
                         {list.length ?
                             <>
+                                <Card style={{ flex: "2", flexGrow:"2" }}
+                                    variant="subtle" color="pink" m="xs" >
+                                    <Box style={{ width: "95%", height: "400px", margin: "10px auto" }}>
+
+                                        <>
+                                            <Horizontal list={list}></Horizontal>
+                                        </>
+
+                                    </Box>
+                                </Card>
                                 {list.map((i, c) =>
 
                                     <Box key={c} style={{ flex: "1", }} >

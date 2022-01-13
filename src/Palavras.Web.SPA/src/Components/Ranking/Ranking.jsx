@@ -1,7 +1,7 @@
 import { Heading, Box, Button, Card, Text, Paragraph, Divider, List, Anchor } from "@dracula/dracula-ui";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGlobeAmericas, faCube, faFilter, faLock, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import { faGlobeAmericas, faCube, faFilter, faLock, faCaretDown, faCaretUp, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { Puff } from 'react-loading-icons'
 import { PolarAreaWithoutLegend } from "../Chart/PolarAreaWithoutLegend";
 import { Horizontal } from "../Chart/Horizontal";
@@ -142,7 +142,7 @@ const Ranking = () => {
 
                         {list.length ?
                             <>
-                                <Card style={{ flex: "2", flexGrow:"2" }}
+                                <Card style={{ flex: "2", flexGrow: "2" }}
                                     variant="subtle" color="pink" m="xs" >
                                     <Box style={{ width: "95%", height: "400px", margin: "10px auto" }}>
 
@@ -163,10 +163,13 @@ const Ranking = () => {
                                                     <div style={{ background: "", padding: "6px 8px 7px 12px", borderRadius: "8px", color: "#cc4b7a" }}>
                                                         <b>{((i.frequencia / list
                                                             .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%</b> dos top 10
-                                                </div>
+                                                    </div>
                                                     <div style={{ padding: "6px 8px 7px 12px", color: "rgb(255, 144, 184)" }}>
                                                         apareceu <b>{i.frequencia}</b> vezes
-                                                </div>
+                                                    </div>
+                                                    <div style={{ padding: "6px 8px 7px 12px", color: "rgb(255, 144, 184)" }}>
+                                                        <Anchor hoverColor="pinkPurple" isExternal={true} href={`https://dicionario-aberto.net/search/${i.palavra}`}> Significado <FontAwesomeIcon color="#9580ff" icon={faExternalLinkAlt}></FontAwesomeIcon></Anchor>
+                                                    </div>
                                                 </Text>
                                             </Box>
                                         </Card>
@@ -215,10 +218,14 @@ const Ranking = () => {
                                                         <div style={{ padding: "6px 0px 0px 0px", color: "bisque" }}>
                                                             <b>{((wordCount.frequencia / i.palavras
                                                                 .reduce((a, b) => a + b.frequencia, 0)) * 100).toFixed(2)}%</b> dos top 10
-                                                </div>
+                                                        </div>
                                                         <div style={{ padding: "6px 0px 0px 0px", color: "bisque" }}>
                                                             apareceu <b>{wordCount.frequencia}</b> vezes
-                                            </div>
+                                                        </div>
+
+                                                        <div style={{ padding: "12px 0px 0px 0px", color: "rgb(255, 144, 184)" }}>
+                                                            <Anchor hoverColor="pinkPurple" isExternal={true} href={`https://dicionario-aberto.net/search/${i.palavra}`}> Significado <FontAwesomeIcon color="#9580ff" icon={faExternalLinkAlt}></FontAwesomeIcon></Anchor>
+                                                        </div>
                                                     </Card>
 
                                                 )

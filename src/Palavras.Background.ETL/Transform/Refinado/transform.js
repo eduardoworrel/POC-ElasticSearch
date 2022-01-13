@@ -96,29 +96,32 @@ module.exports = {
                             WordList.push(newWord);
                         }
                     } catch (e) {
-                        try {
-                            if (lastCharIsZ(wordArray[0])) {
-                                const tryWordWithER = wordArray[0] + "ER";
-                                const {
-                                    data
-                                } = await getObjectFrom(tryWordWithER)
-                                if (data[0].class) {
-                                    newWord = {
-                                        site: keyValue.key,
-                                        word: tryWordWithER,
-                                        class: data[0].class,
-                                        count: wordArray[1].length,
-                                    }
-                                    WordList.push(newWord);
-                                }
-                            }
-                        } catch (e) {
-                            analise.semClasse += 1;
-                        }
+                        
                     }
                 }
-
+                try {
+                    if (lastCharIsZ(wordArray[0])) {
+                        const tryWordWithER = wordArray[0] + "ER";
+                        const {
+                            data
+                        } = await getObjectFrom(tryWordWithER)
+                        if (data[0].class) {
+                            newWord = {
+                                site: keyValue.key,
+                                word: tryWordWithER,
+                                class: data[0].class,
+                                count: wordArray[1].length,
+                            }
+                            WordList.push(newWord);
+                        }
+                    }
+                } catch (e) {
+                    
+                }
                 WordList.push(newWord);
+                if(newWord.class == '?'){
+                    analise.semClasse += 1;
+                }
                 analise.palavras += 1;
             }
         }

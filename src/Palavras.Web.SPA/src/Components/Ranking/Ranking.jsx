@@ -58,10 +58,10 @@ const Ranking = () => {
                         <Box style={{ marginTop: "20px" }}>
                             <Text color="white"><b style={{ fontSize: "1.8em" }} >{atualizacao.quantidadeClasses}</b> <br />Classes gramaticais </Text>
                         </Box>
-                        <Box style={{ marginTop: "20px" }}>
+                        <Box style={{ marginTop: "30px" }}>
                             <Text color="white"> Ultima Atualização <br /><b style={{ fontSize: "1.2em" }} >{atualizacao.ultimaAtualizacao}</b> </Text>
                         </Box>
-                        <Box style={{ marginTop: "20px" }}>
+                        <Box style={{ marginTop: "30px" }}>
                             <Text color="white"> Primeira coleta: <br /><b style={{ fontSize: "1.2em" }} >{atualizacao.dataInicio}</b> </Text>
                         </Box>
                     </section>

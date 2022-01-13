@@ -38,7 +38,7 @@ function montaGrafico(data) {
                             responsive: true,
                             plugins: {
                                 legend: {
-                                    position: 'right'
+                                    display: false
                                 },
                                 title: {
                                     display: true,

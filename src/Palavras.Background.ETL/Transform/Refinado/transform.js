@@ -24,11 +24,11 @@ async function getObjectFrom(string) {
 }
 
 function lastCharIsS(string) {
-    return string[string.length - 1] == 'S'
+    return string[string.length - 1] == 's'
 }
 
-function lastCharIsS(string) {
-    return string[string.length - 1] == 'Z'
+function lastCharIsZ(string) {
+    return string[string.length - 1] == 'z'
 }
 module.exports = {
     transform: async (keyValue) => {
@@ -38,7 +38,7 @@ module.exports = {
             palavras: 0,
             semClasse: 0
         }
-        let newData = keyValue.data.toUpperCase();
+        let newData = keyValue.data.toLowerCase();
         let splitData = newData
             .replace(/(\r\n|\n|\r)/gm, "  ")
             .replace(/\./g, ' ')
@@ -63,7 +63,7 @@ module.exports = {
                 if (data[0].class) {
                     let newWord = {
                         site: keyValue.key,
-                        word: wordArray[0],
+                        word: wordArray[0].toUpperCase(),
                         class: data[0].class,
                         count: wordArray[1].length,
                     }
@@ -73,9 +73,10 @@ module.exports = {
                     throw new Error('sem class');
                 }
             } catch (e) {
+                
                 let newWord = {
                     site: keyValue.key,
-                    word: wordArray[0],
+                    word: wordArray[0].toUpperCase(),
                     class: '?',
                     count: wordArray[1].length,
                 }
@@ -84,46 +85,44 @@ module.exports = {
                     newWord.class = 'numeral'
                 }
 
-                if (lastCharIsS(wordArray[0])) {
-                    try {
+                try {
+                    if (lastCharIsS(wordArray[0])) {
                         const tryWordWithoutS = wordArray[0].slice(0, -1);
+                       
                         const {
                             data
                         } = await getObjectFrom(tryWordWithoutS)
                         if (data[0].class) {
                             newWord = {
                                 site: keyValue.key,
-                                word: tryWordWithoutS,
+                                word: tryWordWithoutS.toUpperCase(),
                                 class: data[0].class,
                                 count: wordArray[1].length,
                             }
-                            WordList.push(newWord);
                         }
-                    } catch (e) {
-                        
                     }
+                } catch (e) {
+
                 }
                 try {
                     if (lastCharIsZ(wordArray[0])) {
-                        const tryWordWithER = wordArray[0] + "ER";
+                        const tryWordWithER = wordArray[0] + "er";
                         const {
                             data
                         } = await getObjectFrom(tryWordWithER)
                         if (data[0].class) {
                             newWord = {
                                 site: keyValue.key,
-                                word: tryWordWithER,
+                                word: tryWordWithER.toUpperCase(),
                                 class: data[0].class,
                                 count: wordArray[1].length,
                             }
-                            WordList.push(newWord);
                         }
                     }
                 } catch (e) {
-                    
                 }
                 WordList.push(newWord);
-                if(newWord.class == '?'){
+                if (newWord.class == '?') {
                     analise.semClasse += 1;
                 }
                 analise.palavras += 1;

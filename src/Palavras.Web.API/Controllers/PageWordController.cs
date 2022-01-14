@@ -91,7 +91,7 @@ namespace Api.Controllers
             {
                 QuantidadeClasses = PageWordService.ProcessaClasses((List<PalavraRefinada>)pages).Count,
                 QuantidadePalavras = pages.Count(),
-            DataInicio = first.Datahora.ToString("dd/MM/yyyy HH:mm"),
+                DataInicio = first.Datahora.ToString("dd/MM/yyyy HH:mm"),
                 UltimaAtualizacao = last.Datahora.ToString("dd/MM/yyyy HH:mm")
             };
             
